@@ -16,6 +16,14 @@
 		]
 	},
 	"repository": "https://github.com/Uproxide/more-difficulties",
+	"settings": {
+		"legacy-icons": {
+			"name": "Legacy Icons",
+			"description": "Uses the legacy difficulty icons.",
+			"type": "bool",
+			"default": false
+		}
+	},
 	"issues": {
 		"info": "Any Issues or Suggestions? [Join the Discord!](https://discord.gg/gy4BrxmWrF)"
 	},
