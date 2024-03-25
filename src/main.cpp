@@ -34,7 +34,7 @@ class $modify(LevelCell) {
     void loadFromLevel(GJGameLevel* p0) {
         LevelCell::loadFromLevel(p0);
 
-	if (!lock)
+	if (!&lock)
 	{
 	        int starCount = p0->m_stars.value();
 	        auto difficultyNode = m_mainLayer->getChildByID("difficulty-container");
@@ -95,7 +95,7 @@ class $modify(LevelInfoLayer) {
 			return false;
 		}
 
-		if (!lock)
+		if (!&lock)
 		{
 	
 			int starCount = p0->m_stars.value();
