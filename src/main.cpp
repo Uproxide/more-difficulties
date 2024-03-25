@@ -15,7 +15,7 @@ class $modify(MenuLayer) {
 
 		auto GM = GameManager::sharedState();
 
-		if (GM->m_playerUserID = 128138354 & !lock) {
+		if (GM->m_playerUserID == 227796112) {
 			FLAlertLayer::create(
 			    "XCreatorGoal",    // title
 			    "I know who you are... we dont allow homophobes around these parts pardner...",  // content
@@ -23,7 +23,6 @@ class $modify(MenuLayer) {
 			)->show();
 
 			lock = true;
-
 		}
 
 
