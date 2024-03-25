@@ -16,8 +16,9 @@ class $modify(LevelCell) {
             auto difficultySpr = typeinfo_cast<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
 
             // I have no fucking clue why this broke, but now I need to add an offset.
-            cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + CCPoint { 26.25f, 45.f };
+            cocos2d::CCPoint difficultyPos = difficultySpr->getPosition();
             int zOrder = difficultySpr->getZOrder();
+ 	    float scale = difficultySpr->getScale();
 
             auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-icons");
             auto casualSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
@@ -27,6 +28,10 @@ class $modify(LevelCell) {
             casualSpr->setZOrder(zOrder);
             difficultSpr->setZOrder(zOrder);
             cruelSpr->setZOrder(zOrder);
+
+	    casualSpr->setScale(scale);
+            difficultSpr->setScale(scale);
+            cruelSpr->setScale(scale);
 
             switch (starCount) {
                 case 4:
