@@ -2,8 +2,61 @@
 
 using namespace geode::prelude;
 
-#include <Geode/modify/LevelInfoLayer.hpp>
 #include <Geode/modify/LevelCell.hpp>
+#include <Geode/modify/LevelInfoLayer.hpp>
+
+class $modify(LevelCell) {
+    void loadFromLevel(GJGameLevel* p0) {
+        LevelCell::loadFromLevel(p0);
+
+        int starCount = p0->m_stars.value();
+        auto difficultyNode = m_mainLayer->getChildByID("difficulty-container");
+
+        if (difficultyNode) {
+            auto difficultySpr = typeinfo_cast<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
+
+            // I have no fucking clue why this broke, but now I need to add an offset.
+            cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + CCPoint { 26.25f, 45.f };
+            int zOrder = difficultySpr->getZOrder();
+
+            auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-icons");
+            auto casualSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
+            auto difficultSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+            auto cruelSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+
+            casualSpr->setZOrder(zOrder);
+            difficultSpr->setZOrder(zOrder);
+            cruelSpr->setZOrder(zOrder);
+
+            switch (starCount) {
+                case 4:
+                    casualSpr->setPosition(difficultyPos);
+                    difficultySpr->setOpacity(0);
+                    this->addChild(casualSpr);
+                    break;
+
+                case 7:
+                    difficultSpr->setPosition(difficultyPos);
+                    difficultySpr->setOpacity(0);
+                    this->addChild(difficultSpr);
+                    break;
+
+                case 9:
+                    cruelSpr->setPosition(difficultyPos);
+                    difficultySpr->setOpacity(0);
+                    this->addChild(cruelSpr);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        else {
+            // log::info("difficultyNode no no exist");
+        }
+    }
+};
 
 class $modify(LevelInfoLayer) {
 	bool init(GJGameLevel* p0, bool p1) {
@@ -12,77 +65,42 @@ class $modify(LevelInfoLayer) {
 		}
 
 		int starCount = p0->m_stars.value();
-		
-		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition();
+
+		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint { 0.25f, 0.f };;
 		int zOrder = m_difficultySprite->getZOrder();
 
-
-		auto casualSpr = CCSprite::create("MD_Difficulty04.png"_spr);
-		auto difficultSpr = CCSprite::create("MD_Difficulty07.png"_spr);
-		auto cruelSpr = CCSprite::create("MD_Difficulty09.png"_spr);
+        auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-icons");
+        auto casualSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr );
+        auto difficultSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr );
+        auto cruelSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr );
 
 		casualSpr->setZOrder(zOrder);
 		difficultSpr->setZOrder(zOrder);
 		cruelSpr->setZOrder(zOrder);
 
+        switch (starCount) {
+            case 4:
+                m_difficultySprite->setOpacity(0);
+                casualSpr->setPosition(difficultyPos);
+                this->addChild(casualSpr);
+                break;
 
+            case 7:
+                m_difficultySprite->setOpacity(0);
+                difficultSpr->setPosition(difficultyPos);
+                this->addChild(difficultSpr);
+                break;
 
-		if (starCount == 4) {
-			casualSpr->setPosition(difficultyPos);
-			this->addChild(casualSpr);
-			m_difficultySprite->setOpacity(0);
-		} else if (starCount == 7) {
-			difficultSpr->setPosition(difficultyPos);
-			this->addChild(difficultSpr);
-			m_difficultySprite->setOpacity(0);
-		} else if (starCount == 9) {
-			cruelSpr->setPosition(difficultyPos);
-			this->addChild(cruelSpr);
-			m_difficultySprite->setOpacity(0);
-		}
+            case 9:
+                m_difficultySprite->setOpacity(0);
+                cruelSpr->setPosition(difficultyPos);
+                this->addChild(cruelSpr);
+                break;
+
+            default:
+                break;
+        }
 
 		return true;
-	}
-};
-
-class $modify(LevelCell) {
-	void loadFromLevel(GJGameLevel* p0) {
-		LevelCell::loadFromLevel(p0);
-
-		int starCount = p0->m_stars.value();
-
-		auto difficultyNode = m_mainLayer->getChildByID("difficulty-container");
-
-		if (difficultyNode) {
-			GJDifficultySprite* difficultySpr = static_cast<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
-
-			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition();
-			int zOrder = difficultySpr->getZOrder();
-
-
-			auto casualSpr = CCSprite::create("MD_Difficulty04.png"_spr);
-			auto difficultSpr = CCSprite::create("MD_Difficulty07.png"_spr);
-			auto cruelSpr = CCSprite::create("MD_Difficulty09.png"_spr);
-
-			casualSpr->setZOrder(zOrder);
-			difficultSpr->setZOrder(zOrder);
-			cruelSpr->setZOrder(zOrder);
-
-			if (starCount == 4) {
-				casualSpr->setPosition(difficultyPos);
-				difficultyNode->addChild(casualSpr);
-				difficultySpr->setOpacity(0);
-			} else if (starCount == 7) {
-				difficultSpr->setPosition(difficultyPos);
-				difficultyNode->addChild(difficultSpr);
-				difficultySpr->setOpacity(0);
-			} else if (starCount == 9) {
-				cruelSpr->setPosition(difficultyPos);
-				difficultyNode->addChild(cruelSpr);
-				difficultySpr->setOpacity(0);
-			}
-		} else {
-			// log::info("difficultyNode no no exist");
-		}
 	}
 };
