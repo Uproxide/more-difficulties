@@ -1,107 +1,43 @@
-#include <Geode/Geode.hpp>
+#include <Geode/modify/GJDifficultySprite.hpp>
+#include <fmt/format.h>
 
 using namespace geode::prelude;
 
-#include <Geode/modify/LevelCell.hpp>
-#include <Geode/modify/LevelInfoLayer.hpp>
+class $modify(GJDifficultySprite) {
+    void updateFeatureStateFromLevel(GJGameLevel* level) {
+        updateCustomDifficultyFrame(level->m_stars);
+        GJDifficultySprite::updateFeatureStateFromLevel(level);
+    }
 
-class $modify(LevelCell) {
-    void loadFromLevel(GJGameLevel* p0) {
-        LevelCell::loadFromLevel(p0);
-
-        int starCount = p0->m_stars.value();
-        auto difficultyNode = m_mainLayer->getChildByID("difficulty-container");
-
-        if (difficultyNode) {
-            auto difficultySpr = typeinfo_cast<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
-
-            // I have no fucking clue why this broke, but now I need to add an offset.
-            cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + CCPoint { 26.25f, 45.f };
-            int zOrder = difficultySpr->getZOrder();
-
-            auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-icons");
-            auto casualSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
-            auto difficultSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-            auto cruelSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-
-            casualSpr->setZOrder(zOrder);
-            difficultSpr->setZOrder(zOrder);
-            cruelSpr->setZOrder(zOrder);
-
-            switch (starCount) {
-                case 4:
-                    casualSpr->setPosition(difficultyPos);
-                    difficultySpr->setOpacity(0);
-                    this->addChild(casualSpr);
-                    break;
-
-                case 7:
-                    difficultSpr->setPosition(difficultyPos);
-                    difficultySpr->setOpacity(0);
-                    this->addChild(difficultSpr);
-                    break;
-
-                case 9:
-                    cruelSpr->setPosition(difficultyPos);
-                    difficultySpr->setOpacity(0);
-                    this->addChild(cruelSpr);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        else {
-            // log::info("difficultyNode no no exist");
+    void updateDifficultyFrame(int frame, GJDifficultyName name) {
+        // Workaround for positions being updated.
+        if (!m_fields->m_customDifficultyFrame) {
+            GJDifficultySprite::updateDifficultyFrame(frame, name);
         }
     }
-};
 
-class $modify(LevelInfoLayer) {
-	bool init(GJGameLevel* p0, bool p1) {
-		if (!LevelInfoLayer::init(p0, p1)) {
-			return false;
-		}
+    void updateCustomDifficultyFrame(int stars) {
+        auto* spriteFrameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
+        bool legacyIcons = Mod::get()->getSettingValue<bool>("legacy-icons");
 
-			int starCount = p0->m_stars.value();
-	
-			cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint { 0.25f, 0.f };;
-			int zOrder = m_difficultySprite->getZOrder();
-	
-		        auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-icons");
-		        auto casualSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr );
-		        auto difficultSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr );
-		        auto cruelSpr = CCSprite::create((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr );
-	
-			casualSpr->setZOrder(zOrder);
-			difficultSpr->setZOrder(zOrder);
-			cruelSpr->setZOrder(zOrder);
-	
-		        switch (starCount) {
-		            case 4:
-		                m_difficultySprite->setOpacity(0);
-		                casualSpr->setPosition(difficultyPos);
-		                this->addChild(casualSpr);
-		                break;
-		
-		            case 7:
-		                m_difficultySprite->setOpacity(0);
-		                difficultSpr->setPosition(difficultyPos);
-		                this->addChild(difficultSpr);
-		                break;
-		
-		            case 9:
-		                m_difficultySprite->setOpacity(0);
-		                cruelSpr->setPosition(difficultyPos);
-		                this->addChild(cruelSpr);
-		                break;
-		
-		            default:
-		                break;
-		        }
+        m_fields->m_customDifficultyFrame = false;
+        
+        std::string suffix = legacyIcons ? "_Legacy" : "";
+        std::string spriteFrameName = fmt::format(
+            "MD_Difficulty{:02}{}.png"_spr,
+            stars,
+            suffix
+        );
 
+        auto* spriteFrame = spriteFrameCache->spriteFrameByName(
+            spriteFrameName.c_str()
+        );
 
-		return true;
-	}
+        if (spriteFrame != nullptr) {
+            m_fields->m_customDifficultyFrame = true;
+            setDisplayFrame(spriteFrame);
+        }
+    }
+
+    bool m_customDifficultyFrame;
 };

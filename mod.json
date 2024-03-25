@@ -11,9 +11,11 @@
 	"developer": "Uproxide",
 	"description": "Adds New Difficulties to the Game!",
 	"resources": {
-		"sprites": [
-			"resources/*.png"
-		]
+		"spritesheets": {
+			"MoreDifficultiesSheet": [
+				"resources/*.png"
+			]
+		}
 	},
 	"repository": "https://github.com/Uproxide/more-difficulties",
 	"settings": {
