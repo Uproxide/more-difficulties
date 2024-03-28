@@ -11,21 +11,11 @@
 	"developer": "Uproxide",
 	"description": "Adds New Difficulties to the Game!",
 	"resources": {
-		"spritesheets": {
-			"MoreDifficultiesSheet": [
-				"resources/*.png"
-			]
+		"sprites": {
+			"resources/*.png"
 		}
 	},
 	"repository": "https://github.com/Uproxide/more-difficulties",
-	"settings": {
-		"legacy-icons": {
-			"name": "Legacy Icons",
-			"description": "Uses the legacy difficulty icons.",
-			"type": "bool",
-			"default": false
-		}
-	},
 	"issues": {
 		"info": "Any Issues or Suggestions? [Join the Discord!](https://discord.gg/gy4BrxmWrF)"
 	},
