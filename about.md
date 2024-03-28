@@ -10,5 +10,5 @@ Adds 3 New Difficulties to the Game!
 
 ## Credits
  * Brift (Difficulty Sprites)
- * Uproxide and sofabeddd (Code)
+ * Uproxide (Code)
 
