@@ -13,7 +13,7 @@ class $modify(LevelInfoLayer) {
 
 		int starCount = p0->m_stars.value();
 
-		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition();
+		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint { .25f, -.1f };
 		int zOrder = m_difficultySprite->getZOrder();
 
 
@@ -56,7 +56,7 @@ class $modify(LevelCell) {
 		if (difficultyNode) {
 			GJDifficultySprite* difficultySpr = static_cast<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
 
-			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition();
+			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + CCPoint { .25f, -.1f };
 			int zOrder = difficultySpr->getZOrder();
 
 
