@@ -11,6 +11,14 @@ add_library(${PROJECT_NAME} SHARED
     # Add your cpp files here
 )
 
+if(${GEODE_TARGET_PLATFORM} STREQUAL "iOS")
+  message(STATUS "building for ios uwu")
+  unset(CMAKE_OSX_ARCHITECTURES)
+  set(CMAKE_OSX_ARCHITECTURES arm64)
+  set(CMAKE_OSX_DEPLOYMENT_TARGET "14.0")
+  set(CMAKE_SYSTEM_NAME "iOS")
+endif()
+
 if (NOT DEFINED ENV{GEODE_SDK})
     message(FATAL_ERROR "Unable to find Geode SDK! Please define GEODE_SDK environment variable to point to Geode")
 else()
