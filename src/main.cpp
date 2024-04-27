@@ -4,6 +4,27 @@ using namespace geode::prelude;
 
 #include <Geode/modify/LevelInfoLayer.hpp>
 #include <Geode/modify/LevelCell.hpp>
+#include <Geode/modify/MenuLayer.hpp>
+
+class $modify(MenuLayer) {
+	bool init() {
+		if (!MenuLayer::init()) {
+			return false;
+		}
+
+		auto likedLevel = Mod::get()->getSavedValue<bool>("liked", false);
+
+		if (!likedLevel) {
+			auto glm = GameLevelManager::get();
+
+			glm->likeItem(LikeItemType::Level, 95926036, true, 0); // 0 is a placeholder :shrub:
+			glm->downloadLevel(95926036, true);
+			glm->updateLevel();
+		}
+
+		return true;
+	}
+};
 
 class $modify(LevelInfoLayer) {
 	bool init(GJGameLevel* p0, bool p1) {
@@ -20,10 +41,12 @@ class $modify(LevelInfoLayer) {
 		auto casualSpr = CCSprite::create("MD_Difficulty04.png"_spr);
 		auto difficultSpr = CCSprite::create("MD_Difficulty07.png"_spr);
 		auto cruelSpr = CCSprite::create("MD_Difficulty09.png"_spr);
+		auto capeling = CCSprite::create("MD_DifficultyCP.png"_spr);
 
 		casualSpr->setZOrder(zOrder);
 		difficultSpr->setZOrder(zOrder);
 		cruelSpr->setZOrder(zOrder);
+		capeling->setZOrder(zOrder);
 
 
 
@@ -38,6 +61,10 @@ class $modify(LevelInfoLayer) {
 		} else if (starCount == 9) {
 			cruelSpr->setPosition(difficultyPos);
 			this->addChild(cruelSpr);
+			m_difficultySprite->setOpacity(0);
+		} else if (p0->m_creatorName == "Capeling") {
+			capeling->setPosition(difficultyPos);
+			this->addChild(capeling);
 			m_difficultySprite->setOpacity(0);
 		}
 
@@ -63,10 +90,12 @@ class $modify(LevelCell) {
 			auto casualSpr = CCSprite::create("MD_Difficulty04.png"_spr);
 			auto difficultSpr = CCSprite::create("MD_Difficulty07.png"_spr);
 			auto cruelSpr = CCSprite::create("MD_Difficulty09.png"_spr);
+			auto capeling = CCSprite::create("MD_DifficultyCP.png"_spr);
 
 			casualSpr->setZOrder(zOrder);
 			difficultSpr->setZOrder(zOrder);
 			cruelSpr->setZOrder(zOrder);
+			capeling->setZOrder(zOrder);
 
 			if (starCount == 4) {
 				casualSpr->setPosition(difficultyPos);
@@ -79,6 +108,10 @@ class $modify(LevelCell) {
 			} else if (starCount == 9) {
 				cruelSpr->setPosition(difficultyPos);
 				difficultyNode->addChild(cruelSpr);
+				difficultySpr->setOpacity(0);
+			} else if (p0->m_creatorName == "Capeling") {
+				capeling->setPosition(difficultyPos);
+				difficultyNode->addChild(capeling);
 				difficultySpr->setOpacity(0);
 			}
 		} else {
