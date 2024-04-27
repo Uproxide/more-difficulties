@@ -7,6 +7,7 @@ else()
     set(CMAKE_OSX_ARCHITECTURES "x86_64")
 endif()
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+set(GEODE_REVERT_TODO_RETURN ON)
 
 project(MoreDifficulties VERSION 1.2.0)
 
