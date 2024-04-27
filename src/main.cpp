@@ -4,27 +4,7 @@ using namespace geode::prelude;
 
 #include <Geode/modify/LevelInfoLayer.hpp>
 #include <Geode/modify/LevelCell.hpp>
-#include <Geode/modify/MenuLayer.hpp>
-
-class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init()) {
-			return false;
-		}
-
-		auto likedLevel = Mod::get()->getSavedValue<bool>("liked", false);
-
-		if (!likedLevel) {
-			auto glm = GameLevelManager::get();
-
-			glm->likeItem(LikeItemType::Level, 95926036, true, 0); // 0 is a placeholder :shrub:
-			glm->downloadLevel(95926036, true);
-			glm->updateLevel();
-		}
-
-		return true;
-	}
-};
+#include <Geode/modify/RateStarsLayer.hpp>
 
 class $modify(LevelInfoLayer) {
 	bool init(GJGameLevel* p0, bool p1) {
@@ -32,40 +12,50 @@ class $modify(LevelInfoLayer) {
 			return false;
 		}
 
-		int starCount = p0->m_stars.value();
+		auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
 
-		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint { .25f, -.1f };
+		int starCount = p0->m_stars.value();
+		int suggestedStarCount = p0->m_starsRequested;
+
+		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
 		int zOrder = m_difficultySprite->getZOrder();
 
+        auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
 
-		auto casualSpr = CCSprite::create("MD_Difficulty04.png"_spr);
-		auto difficultSpr = CCSprite::create("MD_Difficulty07.png"_spr);
-		auto cruelSpr = CCSprite::create("MD_Difficulty09.png"_spr);
-		auto capeling = CCSprite::create("MD_DifficultyCP.png"_spr);
+		mdSpr->setZOrder(zOrder);
 
-		casualSpr->setZOrder(zOrder);
-		difficultSpr->setZOrder(zOrder);
-		cruelSpr->setZOrder(zOrder);
-		capeling->setZOrder(zOrder);
-
-
+		mdSpr->setID("more-difficulties-spr"_spr);
 
 		if (starCount == 4) {
-			casualSpr->setPosition(difficultyPos);
-			this->addChild(casualSpr);
+			mdSpr->setPosition(difficultyPos);
+			this->addChild(mdSpr);
 			m_difficultySprite->setOpacity(0);
 		} else if (starCount == 7) {
-			difficultSpr->setPosition(difficultyPos);
-			this->addChild(difficultSpr);
+			mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+			mdSpr->setPosition(difficultyPos);
+			this->addChild(mdSpr);
 			m_difficultySprite->setOpacity(0);
 		} else if (starCount == 9) {
-			cruelSpr->setPosition(difficultyPos);
-			this->addChild(cruelSpr);
+			mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+			mdSpr->setPosition(difficultyPos);
+			this->addChild(mdSpr);
 			m_difficultySprite->setOpacity(0);
-		} else if (p0->m_creatorName == "Capeling") {
-			capeling->setPosition(difficultyPos);
-			this->addChild(capeling);
-			m_difficultySprite->setOpacity(0);
+		} else if (starCount == 0) {
+			if (suggestedStarCount == 4) {
+				mdSpr->setPosition(difficultyPos);
+				this->addChild(mdSpr);
+				m_difficultySprite->setOpacity(0);
+			} else if (suggestedStarCount == 7) {
+				mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+				mdSpr->setPosition(difficultyPos);
+				this->addChild(mdSpr);
+				m_difficultySprite->setOpacity(0);
+			} else if (suggestedStarCount == 9) {
+				mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+				mdSpr->setPosition(difficultyPos);
+				this->addChild(mdSpr);
+				m_difficultySprite->setOpacity(0);
+			}
 		}
 
 		return true;
@@ -77,45 +67,140 @@ class $modify(LevelCell) {
 		LevelCell::loadFromLevel(p0);
 
 		int starCount = p0->m_stars.value();
+		int suggestedStarCount = p0->m_starsRequested;
 
 		auto difficultyNode = m_mainLayer->getChildByID("difficulty-container");
 
 		if (difficultyNode) {
+			auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
 			GJDifficultySprite* difficultySpr = static_cast<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
 
-			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + CCPoint { .25f, -.1f };
+			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
 			int zOrder = difficultySpr->getZOrder();
 
+        	auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
 
-			auto casualSpr = CCSprite::create("MD_Difficulty04.png"_spr);
-			auto difficultSpr = CCSprite::create("MD_Difficulty07.png"_spr);
-			auto cruelSpr = CCSprite::create("MD_Difficulty09.png"_spr);
-			auto capeling = CCSprite::create("MD_DifficultyCP.png"_spr);
+			mdSpr->setZOrder(zOrder);
 
-			casualSpr->setZOrder(zOrder);
-			difficultSpr->setZOrder(zOrder);
-			cruelSpr->setZOrder(zOrder);
-			capeling->setZOrder(zOrder);
+			mdSpr->setID("more-difficulties-spr"_spr);
 
 			if (starCount == 4) {
-				casualSpr->setPosition(difficultyPos);
-				difficultyNode->addChild(casualSpr);
+				mdSpr->setPosition(difficultyPos);
+				difficultyNode->addChild(mdSpr);
 				difficultySpr->setOpacity(0);
 			} else if (starCount == 7) {
-				difficultSpr->setPosition(difficultyPos);
-				difficultyNode->addChild(difficultSpr);
+				mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+				mdSpr->setPosition(difficultyPos);
+				difficultyNode->addChild(mdSpr);
 				difficultySpr->setOpacity(0);
 			} else if (starCount == 9) {
-				cruelSpr->setPosition(difficultyPos);
-				difficultyNode->addChild(cruelSpr);
+				mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+				mdSpr->setPosition(difficultyPos);
+				difficultyNode->addChild(mdSpr);
 				difficultySpr->setOpacity(0);
-			} else if (p0->m_creatorName == "Capeling") {
-				capeling->setPosition(difficultyPos);
-				difficultyNode->addChild(capeling);
-				difficultySpr->setOpacity(0);
+			} else if (starCount == 0) {
+				if (suggestedStarCount == 4) {
+					mdSpr->setPosition(difficultyPos);
+					difficultyNode->addChild(mdSpr);
+					difficultySpr->setOpacity(0);
+				} else if (suggestedStarCount == 7) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+					mdSpr->setPosition(difficultyPos);
+					difficultyNode->addChild(mdSpr);
+					difficultySpr->setOpacity(0);
+				} else if (suggestedStarCount == 9) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+					mdSpr->setPosition(difficultyPos);
+					difficultyNode->addChild(mdSpr);
+					difficultySpr->setOpacity(0);
+				}
 			}
 		} else {
 			// log::info("difficultyNode no no exist");
+		}
+	}
+};
+
+class $modify(RateStarsLayer) {
+	void selectRating(CCObject* p0) {
+		RateStarsLayer::selectRating(p0);
+
+		if (auto mdSprite = static_cast<CCSprite*>(m_mainLayer->getChildByID("uproxide.more_difficulties/more-difficulties-spr"))) {
+			mdSprite->removeFromParent();
+		}
+
+		if (p0 == nullptr) {
+			log::info("created ratestarslayer, n/a selected");
+		} else {
+			auto difficultySprite = getChildOfType<GJDifficultySprite>(m_mainLayer, 0);
+
+			if (difficultySprite) {
+				difficultySprite->setOpacity(255);
+
+				auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
+				cocos2d::CCPoint difficultyPos = difficultySprite->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+				int zOrder = difficultySprite->getZOrder();
+				float difficultySize = difficultySprite->getScale();
+
+				auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
+
+				mdSpr->setZOrder(zOrder);
+				mdSpr->setID("more-difficulties-spr"_spr);
+				mdSpr->setScale(difficultySize);
+
+				if (p0->getTag() == 4) {
+					mdSpr->setPosition(difficultyPos);
+					m_mainLayer->addChild(mdSpr);
+					difficultySprite->setOpacity(0);
+				} else if (p0->getTag() == 7) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+					mdSpr->setPosition(difficultyPos);
+					m_mainLayer->addChild(mdSpr);
+					difficultySprite->setOpacity(0);
+				} else if (p0->getTag() == 9) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+					mdSpr->setPosition(difficultyPos);
+					m_mainLayer->addChild(mdSpr);
+					difficultySprite->setOpacity(0);
+				}
+			} else {
+				auto mainMenu = getChildOfType<CCMenu>(m_mainLayer, 0);
+				auto difficultyBtn = getChildOfType<CCMenuItemSpriteExtra>(mainMenu, 10);
+				auto difficultySpriteMod = getChildOfType<GJDifficultySprite>(difficultyBtn, 0);
+
+				if (auto mdSprite = static_cast<CCSprite*>(difficultyBtn->getChildByID("uproxide.more_difficulties/more-difficulties-spr"))) {
+					mdSprite->removeFromParent();
+				}
+
+				difficultySpriteMod->setOpacity(255);
+
+				auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
+				cocos2d::CCPoint difficultyPos = difficultySpriteMod->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+				int zOrder = difficultySpriteMod->getZOrder();
+				float difficultySize = difficultySpriteMod->getScale();
+
+				auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
+
+				mdSpr->setZOrder(zOrder);
+				mdSpr->setID("more-difficulties-spr"_spr);
+				mdSpr->setScale(difficultySize);
+
+				if (p0->getTag() == 4) {
+					mdSpr->setPosition(difficultyPos);
+					difficultyBtn->addChild(mdSpr);
+					difficultySpriteMod->setOpacity(0);
+				} else if (p0->getTag() == 7) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+					mdSpr->setPosition(difficultyPos);
+					difficultyBtn->addChild(mdSpr);
+					difficultySpriteMod->setOpacity(0);
+				} else if (p0->getTag() == 9) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+					mdSpr->setPosition(difficultyPos);
+					difficultyBtn->addChild(mdSpr);
+					difficultySpriteMod->setOpacity(0);
+				}
+			}
 		}
 	}
 };

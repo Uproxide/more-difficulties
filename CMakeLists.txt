@@ -1,18 +1,14 @@
 cmake_minimum_required(VERSION 3.21)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_OSX_ARCHITECTURES "x86_64")
+if ("${GEODE_TARGET_PLATFORM}" STREQUAL "iOS")
+    set(CMAKE_OSX_ARCHITECTURES "arm64")
+else()
+    set(CMAKE_OSX_ARCHITECTURES "x86_64")
+endif()
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 project(MoreDifficulties VERSION 1.2.0)
-
-if(${GEODE_TARGET_PLATFORM} STREQUAL "iOS")
-  message(STATUS "building for ios uwu")
-  unset(CMAKE_OSX_ARCHITECTURES)
-  set(CMAKE_OSX_ARCHITECTURES arm64)
-  set(CMAKE_OSX_DEPLOYMENT_TARGET "14.0")
-  set(CMAKE_SYSTEM_NAME "iOS")
-endif()
 
 add_library(${PROJECT_NAME} SHARED
     src/main.cpp

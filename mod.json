@@ -12,15 +12,25 @@
 	"developer": "Uproxide",
 	"description": "Adds New Difficulties to the Game!",
 	"resources": {
-        "sprites": [
-            		"resources/*.png"
-        	]
-    	},
+        "spritesheets": {
+			"MD_DifficultySheet": [
+				"resources/DifficultySheet/*.png"
+			]
+		}
+	},
 	"repository": "https://github.com/Uproxide/more-difficulties",
 	"issues": {
 		"info": "Any Issues or Suggestions? [Join the Discord!](https://discord.gg/gy4BrxmWrF)"
 	},
 	"tags": [
 		"Customization", "Difficulties", "LevelInfoLayer", "LevelCell"
-	]
+	],
+	"settings": {
+		"legacy-difficulties": {
+			"name": "Legacy Difficulties",
+			"description": "Enables Legacy (Pre-1.1.0) Icons",
+			"type": "bool",
+			"default": false
+		}
+	}
 }
