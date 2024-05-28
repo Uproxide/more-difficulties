@@ -43,7 +43,7 @@ jobs:
           combine: true
           target: ${{ matrix.config.target }}
 
-   package:
+  package:
     name: Package builds
     runs-on: ubuntu-latest
     needs: ['build']
