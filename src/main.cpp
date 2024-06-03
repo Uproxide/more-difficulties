@@ -62,6 +62,7 @@ class $modify(LevelInfoLayer) {
 	}
 };
 
+/*
 class $modify(LevelCell) {
 	void loadFromLevel(GJGameLevel* p0) {
 		LevelCell::loadFromLevel(p0);
@@ -204,3 +205,4 @@ class $modify(RateStarsLayer) {
 		}
 	}
 };
+*/
