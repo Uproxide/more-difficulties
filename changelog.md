@@ -1,3 +1,6 @@
+# 1.4.1
+ * Bugfix
+ 
 # 1.4.0
  * 2.206!
  * Updated Legacy Sprites (Thanks Krintop!)
