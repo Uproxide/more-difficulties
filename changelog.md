@@ -1,5 +1,7 @@
-# 1.3.1
- * iOS support, again
+# 1.4.0
+ * 2.206!
+ * Updated Legacy Sprites (Thanks Krintop!)
+ * Main Level Support :3
 
 # 1.3.0
  * Support for Unrated Levels

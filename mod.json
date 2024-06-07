@@ -1,12 +1,10 @@
 {
-	"geode": "2.0.0-beta.27",
+	"geode": "3.0.0-alpha.1",
 	"gd": {
 		"android": "2.206",
-		"ios": "2.206",
-		"win": "2.206",
-		"mac": "2.206"
+		"win": "2.206"
 	},
-	"version": "v1.3.1",
+	"version": "v1.4.0",
 	"id": "uproxide.more_difficulties",
 	"name": "More Difficulties",
 	"developer": "Uproxide",
@@ -23,14 +21,26 @@
 		"info": "Any Issues or Suggestions? [Join the Discord!](https://discord.gg/gy4BrxmWrF)"
 	},
 	"tags": [
-		"Customization", "Difficulties", "LevelInfoLayer", "LevelCell"
+		"Interface", "Enhancement"
 	],
+	"links": {
+		"community": "https://discord.gg/gy4BrxmWrF",
+		"homepage": "https://uproxide.xyz",
+		"source": "https://github.com/uproxide/more-difficulties"
+	},
 	"settings": {
 		"legacy-difficulties": {
 			"name": "Legacy Difficulties",
-			"description": "Enables Legacy (Pre-1.1.0) Icons",
+			"description": "Enables Legacy Difficulty Sprites (By Krintop)",
 			"type": "bool",
 			"default": false
 		}
-	}
+	},
+	"dependencies": [
+		{
+			"id": "geode.node-ids",
+			"version": ">=1.11.0",
+			"importance": "required"
+  		}
+  	]
 }

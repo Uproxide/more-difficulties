@@ -8,7 +8,7 @@ else()
 endif()
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
-project(MoreDifficulties VERSION 1.3.1)
+project(MoreDifficulties VERSION 1.4.0)
 
 add_library(${PROJECT_NAME} SHARED
     src/main.cpp

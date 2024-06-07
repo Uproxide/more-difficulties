@@ -9,7 +9,8 @@ Adds 3 New Difficulties to the Game!
  * Cruel (9*)
 
 ## Credits
+ * Uproxide (Creator)
  * Brift (Difficulty Sprites)
- * Uproxide (Code)
+ * Krintop (Legacy Difficulty Sprites)
  * The Discord Server (Your Ideas)
 
