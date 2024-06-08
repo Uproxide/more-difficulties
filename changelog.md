@@ -1,3 +1,6 @@
+# 1.4.2
+ * Update Node IDs Dependency
+   
 # 1.4.1
  * Bugfix
  
