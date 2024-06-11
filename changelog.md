@@ -1,3 +1,6 @@
+# 1.4.2
+ * Updated Textures for Legacy and Casual
+
 # 1.4.1
  * Bugfix
  
