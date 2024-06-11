@@ -1,6 +1,7 @@
 # 1.4.2
  * Updated Textures for Legacy and Casual
-
+ * Update Node IDs Dependency
+   
 # 1.4.1
  * Bugfix
  
