@@ -187,6 +187,7 @@ class $modify(LevelCell) {
 	}
 }; 
 
+#ifndef GEODE_IS_MACOS
 class $modify(RateStarsLayer) {
 	void selectRating(CCObject* p0) {
 		RateStarsLayer::selectRating(p0);
@@ -283,6 +284,7 @@ class $modify(RateStarsLayer) {
 		}
 	}
 };
+#endif
 
 class $modify(LevelPage) {
 	static void onModify(auto& self) {

@@ -4,6 +4,7 @@
  * Bump Version
  * Removed Uproxbrine
  * Killed Riley :extremedemon:
+ * oh yeah and mac os is back ig ughhhh more WORK for me!
 
 # 1.4.2
  * Updated Textures for Legacy and Casual
