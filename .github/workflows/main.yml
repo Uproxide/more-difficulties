@@ -36,8 +36,7 @@ jobs:
         uses: geode-sdk/build-geode-mod@main
         with:
           combine: true
-          cli: v3.0.0-beta.1
-          sdk: v3.0.0-alpha.2
+          sdk: v3.0.0-beta.1
           target: ${{ matrix.config.target }}
       
   package:

@@ -1,3 +1,10 @@
+# 1.5.0
+ * Update Casual Sprite
+ * Add Legendary and Mythic Sprites
+ * Bump Version
+ * Removed Uproxbrine
+ * Killed Riley :extremedemon:
+
 # 1.4.2
  * Updated Textures for Legacy and Casual
  * Update Node IDs Dependency
@@ -29,3 +36,4 @@
 
 # 1.0.0
  * Initial Release
+ * Added Uproxbrine

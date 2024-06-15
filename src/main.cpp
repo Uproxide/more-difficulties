@@ -16,6 +16,8 @@ class $modify(LevelInfoLayer) {
 			return false;
 		}
 
+		log::info("{}", p0->m_isEpic);
+
 		auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
 
 		int starCount = p0->m_stars.value();
@@ -27,38 +29,68 @@ class $modify(LevelInfoLayer) {
         auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
 
 		mdSpr->setZOrder(zOrder);
+		mdSpr->setID("more-difficulties-spr"_spr);
 
-		// mdSpr->setID("more-difficulties-spr"_spr);
+		switch(starCount) {
+			case 4:
+				if (p0->m_isEpic == 2) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_LegacyLegendary.png"_spr : "MD_Difficulty04Legendary.png"_spr);
+				} else if (p0->m_isEpic == 3) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_LegacyMythic.png"_spr : "MD_Difficulty04Mythic.png"_spr);
+				}
+				mdSpr->setPosition(difficultyPos);
+				this->addChild(mdSpr);
+				m_difficultySprite->setOpacity(0);
+				break;
+			case 7:
+				if (p0->m_isEpic == 2) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_LegacyLegendary.png"_spr : "MD_Difficulty07Legendary.png"_spr);
+				} else if (p0->m_isEpic == 3) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_LegacyMythic.png"_spr : "MD_Difficulty07Mythic.png"_spr);
+				} else {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+				}
+				mdSpr->setPosition(difficultyPos);
+				this->addChild(mdSpr);
+				m_difficultySprite->setOpacity(0);
+				break;
+			case 9:
+				if (p0->m_isEpic == 2) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_LegacyLegendary.png"_spr : "MD_Difficulty09Legendary.png"_spr);
+				} else if (p0->m_isEpic == 3) {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_LegacyMythic.png"_spr : "MD_Difficulty09Mythic.png"_spr);
+				} else {
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+				}
+				mdSpr->setPosition(difficultyPos);
+				this->addChild(mdSpr);
+				m_difficultySprite->setOpacity(0);
+				break;
+			default:
+				break;
+		}
 
-		if (starCount == 4) {
-			mdSpr->setPosition(difficultyPos);
-			this->addChild(mdSpr);
-			m_difficultySprite->setOpacity(0);
-		} else if (starCount == 7) {
-			mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-			mdSpr->setPosition(difficultyPos);
-			this->addChild(mdSpr);
-			m_difficultySprite->setOpacity(0);
-		} else if (starCount == 9) {
-			mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-			mdSpr->setPosition(difficultyPos);
-			this->addChild(mdSpr);
-			m_difficultySprite->setOpacity(0);
-		} else if (starCount == 0) {
-			if (suggestedStarCount == 4) {
-				mdSpr->setPosition(difficultyPos);
-				this->addChild(mdSpr);
-				m_difficultySprite->setOpacity(0);
-			} else if (suggestedStarCount == 7) {
-				mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-				mdSpr->setPosition(difficultyPos);
-				this->addChild(mdSpr);
-				m_difficultySprite->setOpacity(0);
-			} else if (suggestedStarCount == 9) {
-				mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-				mdSpr->setPosition(difficultyPos);
-				this->addChild(mdSpr);
-				m_difficultySprite->setOpacity(0);
+		if (starCount == 0) {
+			switch(suggestedStarCount) {
+				case 4:
+					mdSpr->setPosition(difficultyPos);
+					this->addChild(mdSpr);
+					m_difficultySprite->setOpacity(0);
+					break;
+				case 7:
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+					mdSpr->setPosition(difficultyPos);
+					this->addChild(mdSpr);
+					m_difficultySprite->setOpacity(0);
+					break;
+				case 9:
+					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+					mdSpr->setPosition(difficultyPos);
+					this->addChild(mdSpr);
+					m_difficultySprite->setOpacity(0);
+					break;
+				default:
+					break;
 			}
 		}
 
@@ -85,38 +117,68 @@ class $modify(LevelCell) {
         	auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
 
 			mdSpr->setZOrder(zOrder);
-
 			mdSpr->setID("more-difficulties-spr"_spr);
 
-			if (starCount == 4) {
-				mdSpr->setPosition(difficultyPos);
-				difficultyNode->addChild(mdSpr);
-				difficultySpr->setOpacity(0);
-			} else if (starCount == 7) {
-				mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-				mdSpr->setPosition(difficultyPos);
-				difficultyNode->addChild(mdSpr);
-				difficultySpr->setOpacity(0);
-			} else if (starCount == 9) {
-				mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-				mdSpr->setPosition(difficultyPos);
-				difficultyNode->addChild(mdSpr);
-				difficultySpr->setOpacity(0);
-			} else if (starCount == 0) {
-				if (suggestedStarCount == 4) {
+			switch(starCount) {
+				case 4:
+					if (p0->m_isEpic == 2) {
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_LegacyLegendary.png"_spr : "MD_Difficulty04Legendary.png"_spr);
+					} else if (p0->m_isEpic == 3) {
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_LegacyMythic.png"_spr : "MD_Difficulty04Mythic.png"_spr);
+					}
 					mdSpr->setPosition(difficultyPos);
 					difficultyNode->addChild(mdSpr);
 					difficultySpr->setOpacity(0);
-				} else if (suggestedStarCount == 7) {
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+					break;
+				case 7:
+					if (p0->m_isEpic == 2) {
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_LegacyLegendary.png"_spr : "MD_Difficulty07Legendary.png"_spr);
+					} else if (p0->m_isEpic == 3) {
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_LegacyMythic.png"_spr : "MD_Difficulty07Mythic.png"_spr);
+					} else {
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+					}
 					mdSpr->setPosition(difficultyPos);
 					difficultyNode->addChild(mdSpr);
 					difficultySpr->setOpacity(0);
-				} else if (suggestedStarCount == 9) {
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+					break;
+				case 9:
+					if (p0->m_isEpic == 2) {
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_LegacyLegendary.png"_spr : "MD_Difficulty09Legendary.png"_spr);
+					} else if (p0->m_isEpic == 3) {
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_LegacyMythic.png"_spr : "MD_Difficulty09Mythic.png"_spr);
+					} else {
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+					}
 					mdSpr->setPosition(difficultyPos);
 					difficultyNode->addChild(mdSpr);
 					difficultySpr->setOpacity(0);
+					break;
+				default:
+					break;
+			}
+
+			if (starCount == 0) {
+				switch(suggestedStarCount) {
+					case 4:
+						mdSpr->setPosition(difficultyPos);
+						difficultyNode->addChild(mdSpr);
+						difficultySpr->setOpacity(0);
+						break;
+					case 7:
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+						mdSpr->setPosition(difficultyPos);
+						difficultyNode->addChild(mdSpr);
+						difficultySpr->setOpacity(0);
+						break;
+					case 9:
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+						mdSpr->setPosition(difficultyPos);
+						difficultyNode->addChild(mdSpr);
+						difficultySpr->setOpacity(0);
+						break;
+					default:
+						break;
 				}
 			}
 		} else {
