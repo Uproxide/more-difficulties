@@ -1,11 +1,9 @@
 {
 	"geode": "3.0.0-beta.1",
 	"gd": {
-		"android64": "2.206",
-		"android32": "2.206",
+		"android": "2.206",
 		"win": "2.206",
-		"mac-intel": "2.206",
-		"mac-arm": "2.206"
+		"mac": "2.206"
 	},
 	"version": "v1.5.0",
 	"id": "uproxide.more_difficulties",
