@@ -8,7 +8,27 @@ using namespace geode::prelude;
 #include <Geode/modify/ShareLevelLayer.hpp>
 #include <Geode/modify/LevelPage.hpp>
 
+#include "ToggleDifficultiesNode.hpp"
+#include "ToggleDifficultiesPopup.hpp"
+#include "SaveThings.hpp"
+
 // amunjud
+
+SettingNode* SettingRefreshValue::createNode(float width) {
+    return ToggleDifficultiesNode::create(this, width);
+}
+
+void ToggleDifficultiesNode::onToggleBtn(CCObject*) {
+	ToggleDifficultiesPopup::create()->show();
+}
+
+$on_mod(Loaded) {
+    Mod::get()->addCustomSetting<SettingRefreshValue>("toggle-difficulties", "none");
+
+	SaveThings::casual = Mod::get()->getSavedValue<bool>("casual", true);
+	SaveThings::tough = Mod::get()->getSavedValue<bool>("tough", true);
+	SaveThings::cruel = Mod::get()->getSavedValue<bool>("cruel", true);
+}
 
 class $modify(LevelInfoLayer) {
 	bool init(GJGameLevel* p0, bool p1) {
@@ -33,38 +53,27 @@ class $modify(LevelInfoLayer) {
 
 		switch(starCount) {
 			case 4:
-				if (p0->m_isEpic == 2) {
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_LegacyLegendary.png"_spr : "MD_Difficulty04Legendary.png"_spr);
-				} else if (p0->m_isEpic == 3) {
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_LegacyMythic.png"_spr : "MD_Difficulty04Mythic.png"_spr);
+				if (SaveThings::casual) {
+					mdSpr->setPosition(difficultyPos);
+					this->addChild(mdSpr);
+					m_difficultySprite->setOpacity(0);
 				}
-				mdSpr->setPosition(difficultyPos);
-				this->addChild(mdSpr);
-				m_difficultySprite->setOpacity(0);
 				break;
 			case 7:
-				if (p0->m_isEpic == 2) {
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_LegacyLegendary.png"_spr : "MD_Difficulty07Legendary.png"_spr);
-				} else if (p0->m_isEpic == 3) {
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_LegacyMythic.png"_spr : "MD_Difficulty07Mythic.png"_spr);
-				} else {
+				if (SaveThings::tough) {
 					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+					mdSpr->setPosition(difficultyPos);
+					this->addChild(mdSpr);
+					m_difficultySprite->setOpacity(0);
 				}
-				mdSpr->setPosition(difficultyPos);
-				this->addChild(mdSpr);
-				m_difficultySprite->setOpacity(0);
 				break;
 			case 9:
-				if (p0->m_isEpic == 2) {
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_LegacyLegendary.png"_spr : "MD_Difficulty09Legendary.png"_spr);
-				} else if (p0->m_isEpic == 3) {
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_LegacyMythic.png"_spr : "MD_Difficulty09Mythic.png"_spr);
-				} else {
+				if (SaveThings::cruel) {
 					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+					mdSpr->setPosition(difficultyPos);
+					this->addChild(mdSpr);
+					m_difficultySprite->setOpacity(0);
 				}
-				mdSpr->setPosition(difficultyPos);
-				this->addChild(mdSpr);
-				m_difficultySprite->setOpacity(0);
 				break;
 			default:
 				break;
@@ -73,21 +82,27 @@ class $modify(LevelInfoLayer) {
 		if (starCount == 0) {
 			switch(suggestedStarCount) {
 				case 4:
-					mdSpr->setPosition(difficultyPos);
-					this->addChild(mdSpr);
-					m_difficultySprite->setOpacity(0);
+					if (SaveThings::casual) {
+						mdSpr->setPosition(difficultyPos);
+						this->addChild(mdSpr);
+						m_difficultySprite->setOpacity(0);
+					}
 					break;
 				case 7:
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-					mdSpr->setPosition(difficultyPos);
-					this->addChild(mdSpr);
-					m_difficultySprite->setOpacity(0);
+					if (SaveThings::tough) {
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+						mdSpr->setPosition(difficultyPos);
+						this->addChild(mdSpr);
+						m_difficultySprite->setOpacity(0);
+					}
 					break;
 				case 9:
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-					mdSpr->setPosition(difficultyPos);
-					this->addChild(mdSpr);
-					m_difficultySprite->setOpacity(0);
+					if (SaveThings::cruel) {
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+						mdSpr->setPosition(difficultyPos);
+						this->addChild(mdSpr);
+						m_difficultySprite->setOpacity(0);
+					}
 					break;
 				default:
 					break;
@@ -121,38 +136,27 @@ class $modify(LevelCell) {
 
 			switch(starCount) {
 				case 4:
-					if (p0->m_isEpic == 2) {
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_LegacyLegendary.png"_spr : "MD_Difficulty04Legendary.png"_spr);
-					} else if (p0->m_isEpic == 3) {
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_LegacyMythic.png"_spr : "MD_Difficulty04Mythic.png"_spr);
+					if (SaveThings::casual) {
+						mdSpr->setPosition(difficultyPos);
+						difficultyNode->addChild(mdSpr);
+						difficultySpr->setOpacity(0);
 					}
-					mdSpr->setPosition(difficultyPos);
-					difficultyNode->addChild(mdSpr);
-					difficultySpr->setOpacity(0);
 					break;
 				case 7:
-					if (p0->m_isEpic == 2) {
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_LegacyLegendary.png"_spr : "MD_Difficulty07Legendary.png"_spr);
-					} else if (p0->m_isEpic == 3) {
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_LegacyMythic.png"_spr : "MD_Difficulty07Mythic.png"_spr);
-					} else {
+					if (SaveThings::tough) {
 						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+						mdSpr->setPosition(difficultyPos);
+						difficultyNode->addChild(mdSpr);
+						difficultySpr->setOpacity(0);
 					}
-					mdSpr->setPosition(difficultyPos);
-					difficultyNode->addChild(mdSpr);
-					difficultySpr->setOpacity(0);
 					break;
 				case 9:
-					if (p0->m_isEpic == 2) {
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_LegacyLegendary.png"_spr : "MD_Difficulty09Legendary.png"_spr);
-					} else if (p0->m_isEpic == 3) {
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_LegacyMythic.png"_spr : "MD_Difficulty09Mythic.png"_spr);
-					} else {
+					if (SaveThings::cruel) {
 						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+						mdSpr->setPosition(difficultyPos);
+						difficultyNode->addChild(mdSpr);
+						difficultySpr->setOpacity(0);
 					}
-					mdSpr->setPosition(difficultyPos);
-					difficultyNode->addChild(mdSpr);
-					difficultySpr->setOpacity(0);
 					break;
 				default:
 					break;
@@ -161,21 +165,27 @@ class $modify(LevelCell) {
 			if (starCount == 0) {
 				switch(suggestedStarCount) {
 					case 4:
-						mdSpr->setPosition(difficultyPos);
-						difficultyNode->addChild(mdSpr);
-						difficultySpr->setOpacity(0);
+						if (SaveThings::casual) {
+							mdSpr->setPosition(difficultyPos);
+							difficultyNode->addChild(mdSpr);
+							difficultySpr->setOpacity(0);
+						}
 						break;
 					case 7:
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-						mdSpr->setPosition(difficultyPos);
-						difficultyNode->addChild(mdSpr);
-						difficultySpr->setOpacity(0);
+						if (SaveThings::tough) {
+							mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+							mdSpr->setPosition(difficultyPos);
+							difficultyNode->addChild(mdSpr);
+							difficultySpr->setOpacity(0);
+						}
 						break;
 					case 9:
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-						mdSpr->setPosition(difficultyPos);
-						difficultyNode->addChild(mdSpr);
-						difficultySpr->setOpacity(0);
+						if (SaveThings::cruel) {
+							mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+							mdSpr->setPosition(difficultyPos);
+							difficultyNode->addChild(mdSpr);
+							difficultySpr->setOpacity(0);
+						}
 						break;
 					default:
 						break;
@@ -217,21 +227,27 @@ class $modify(RateStarsLayer) {
 
 				switch(p0->getTag()) {
 					case 4:
-						mdSpr->setPosition(difficultyPos);
-						this->addChild(mdSpr);
-						difficultySprite->setOpacity(0);
+						if (SaveThings::casual) {
+							mdSpr->setPosition(difficultyPos);
+							this->addChild(mdSpr);
+							difficultySprite->setOpacity(0);
+						}
 						break;
 					case 7:
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-						mdSpr->setPosition(difficultyPos);
-						this->addChild(mdSpr);
-						difficultySprite->setOpacity(0);
+						if (SaveThings::tough) {
+							mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+							mdSpr->setPosition(difficultyPos);
+							this->addChild(mdSpr);
+							difficultySprite->setOpacity(0);
+						}
 						break;
 					case 9:
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-						mdSpr->setPosition(difficultyPos);
-						this->addChild(mdSpr);
-						difficultySprite->setOpacity(0);
+						if (SaveThings::cruel) {
+							mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+							mdSpr->setPosition(difficultyPos);
+							this->addChild(mdSpr);
+							difficultySprite->setOpacity(0);
+						}
 						break;
 					default:
 						break;
@@ -261,21 +277,27 @@ class $modify(RateStarsLayer) {
 
 				switch(p0->getTag()) {
 					case 4:
-						mdSpr->setPosition(difficultyPos);
-						difficultyBtn->addChild(mdSpr);
-						difficultySpriteMod->setOpacity(0);
+						if (SaveThings::casual) {
+							mdSpr->setPosition(difficultyPos);
+							difficultyBtn->addChild(mdSpr);
+							difficultySpriteMod->setOpacity(0);
+						}
 						break;
 					case 7:
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-						mdSpr->setPosition(difficultyPos);
-						difficultyBtn->addChild(mdSpr);
-						difficultySpriteMod->setOpacity(0);
+						if (SaveThings::tough) {
+							mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+							mdSpr->setPosition(difficultyPos);
+							difficultyBtn->addChild(mdSpr);
+							difficultySpriteMod->setOpacity(0);
+						}
 						break;
 					case 9:
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-						mdSpr->setPosition(difficultyPos);
-						difficultyBtn->addChild(mdSpr);
-						difficultySpriteMod->setOpacity(0);
+						if (SaveThings::cruel) {
+							mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+							mdSpr->setPosition(difficultyPos);
+							difficultyBtn->addChild(mdSpr);
+							difficultySpriteMod->setOpacity(0);
+						}
 						break;
 					default:
 						break;
@@ -317,29 +339,33 @@ class $modify(LevelPage) {
 			switch(p0->m_levelID) {
 				case 5:
 				case 7:
-					difficultySpr->getParent()->addChild(mdSpr);
-					mdSpr->setPosition(difficultyPos);
-					difficultySpr->setVisible(false);
+					if (SaveThings::casual) {
+						difficultySpr->getParent()->addChild(mdSpr);
+						mdSpr->setPosition(difficultyPos);
+						difficultySpr->setVisible(false);
+					}
 					break;
-				
 				case 8:
 				case 9:		
 				case 13:
 				case 21:
-					difficultySpr->getParent()->addChild(mdSpr);
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07Small_Legacy.png"_spr : "MD_Difficulty07Small.png"_spr);
-					mdSpr->setPosition(difficultyPos);
-					difficultySpr->setVisible(false);
+				case 22:
+					if (SaveThings::tough) {
+						difficultySpr->getParent()->addChild(mdSpr);
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07Small_Legacy.png"_spr : "MD_Difficulty07Small.png"_spr);
+						mdSpr->setPosition(difficultyPos);
+						difficultySpr->setVisible(false);
+					}
 					break;
-					
 				case 11:
 				case 15:
-					difficultySpr->getParent()->addChild(mdSpr);
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09Small_Legacy.png"_spr : "MD_Difficulty09Small.png"_spr);
-					mdSpr->setPosition(difficultyPos);
-					difficultySpr->setVisible(false);
+					if (SaveThings::cruel) {
+						difficultySpr->getParent()->addChild(mdSpr);
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09Small_Legacy.png"_spr : "MD_Difficulty09Small.png"_spr);
+						mdSpr->setPosition(difficultyPos);
+						difficultySpr->setVisible(false);
+					}
 					break;
-
 				default:
 					/* we all gotta */ break; /* sometime */
 			} // sorry for the sin guys... best way for Main Levles...
@@ -364,4 +390,5 @@ class $modify(LevelPage) {
 		}
 	}
 }; */
+
 

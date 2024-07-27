@@ -1,3 +1,8 @@
+# 1.6.0-prerelease.1
+ * Toggle Difficulties option in mod settings
+ * Removed Legendary and Mythic Glows temperarily
+ * Absolutely killed herobrine
+
 # 1.5.0
  * Update Casual Sprite
  * Add Legendary and Mythic Sprites
