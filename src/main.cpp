@@ -43,7 +43,7 @@ class $modify(LevelInfoLayer) {
 		int starCount = p0->m_stars.value();
 		int suggestedStarCount = p0->m_starsRequested;
 
-		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
 		int zOrder = m_difficultySprite->getZOrder();
 
         auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
