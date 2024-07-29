@@ -42,8 +42,10 @@ class $modify(LevelInfoLayer) {
 
 		int starCount = p0->m_stars.value();
 		int suggestedStarCount = p0->m_starsRequested;
+		int difficulty = p0->getAverageDifficulty();
+		bool isDemon = p0->m_demon.value() == 1;
 
-		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
 		int zOrder = m_difficultySprite->getZOrder();
 
         auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
@@ -53,14 +55,14 @@ class $modify(LevelInfoLayer) {
 
 		switch(starCount) {
 			case 4:
-				if (SaveThings::casual) {
+				if (SaveThings::casual && !isDemon && difficulty == 3) {
 					mdSpr->setPosition(difficultyPos);
 					this->addChild(mdSpr);
 					m_difficultySprite->setOpacity(0);
 				}
 				break;
 			case 7:
-				if (SaveThings::tough) {
+				if (SaveThings::tough && !isDemon && difficulty == 4) {
 					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
 					mdSpr->setPosition(difficultyPos);
 					this->addChild(mdSpr);
@@ -68,7 +70,7 @@ class $modify(LevelInfoLayer) {
 				}
 				break;
 			case 9:
-				if (SaveThings::cruel) {
+				if (SaveThings::cruel && !isDemon && difficulty == 5) {
 					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
 					mdSpr->setPosition(difficultyPos);
 					this->addChild(mdSpr);
@@ -119,6 +121,8 @@ class $modify(LevelCell) {
 
 		int starCount = p0->m_stars.value();
 		int suggestedStarCount = p0->m_starsRequested;
+		int difficulty = p0->getAverageDifficulty();
+		bool isDemon = p0->m_demon.value() == 1;
 
 		auto difficultyNode = m_mainLayer->getChildByID("difficulty-container");
 
@@ -126,7 +130,7 @@ class $modify(LevelCell) {
 			auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
 			GJDifficultySprite* difficultySpr = static_cast<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
 
-			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
 			int zOrder = difficultySpr->getZOrder();
 
         	auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
@@ -136,14 +140,14 @@ class $modify(LevelCell) {
 
 			switch(starCount) {
 				case 4:
-					if (SaveThings::casual) {
+					if (SaveThings::casual && !isDemon && difficulty == 3) {
 						mdSpr->setPosition(difficultyPos);
 						difficultyNode->addChild(mdSpr);
 						difficultySpr->setOpacity(0);
 					}
 					break;
 				case 7:
-					if (SaveThings::tough) {
+					if (SaveThings::tough && !isDemon && difficulty == 4) {
 						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
 						mdSpr->setPosition(difficultyPos);
 						difficultyNode->addChild(mdSpr);
@@ -151,7 +155,7 @@ class $modify(LevelCell) {
 					}
 					break;
 				case 9:
-					if (SaveThings::cruel) {
+					if (SaveThings::cruel && !isDemon && difficulty == 5) {
 						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
 						mdSpr->setPosition(difficultyPos);
 						difficultyNode->addChild(mdSpr);
@@ -197,7 +201,6 @@ class $modify(LevelCell) {
 	}
 }; 
 
-#ifndef GEODE_IS_MACOS
 class $modify(RateStarsLayer) {
 	void selectRating(CCObject* p0) {
 		RateStarsLayer::selectRating(p0);
@@ -215,7 +218,7 @@ class $modify(RateStarsLayer) {
 				difficultySprite->setOpacity(255);
 
 				auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
-				cocos2d::CCPoint difficultyPos = difficultySprite->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+				cocos2d::CCPoint difficultyPos = difficultySprite->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
 				int zOrder = difficultySprite->getZOrder();
 				float difficultySize = difficultySprite->getScale();
 
@@ -261,7 +264,7 @@ class $modify(RateStarsLayer) {
 				difficultySpriteMod->setOpacity(255);
 
 				auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
-				cocos2d::CCPoint difficultyPos = difficultySpriteMod->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+				cocos2d::CCPoint difficultyPos = difficultySpriteMod->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
 				int zOrder = difficultySpriteMod->getZOrder();
 				float difficultySize = difficultySpriteMod->getScale();
 
@@ -306,7 +309,6 @@ class $modify(RateStarsLayer) {
 		}
 	}
 };
-#endif
 
 class $modify(LevelPage) {
 	static void onModify(auto& self) {
