@@ -128,7 +128,7 @@ class $modify(LevelCell) {
 			auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
 			GJDifficultySprite* difficultySpr = static_cast<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
 
-			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
 			int zOrder = difficultySpr->getZOrder();
 
         	auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
@@ -216,7 +216,7 @@ class $modify(RateStarsLayer) {
 				difficultySprite->setOpacity(255);
 
 				auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
-				cocos2d::CCPoint difficultyPos = difficultySprite->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+				cocos2d::CCPoint difficultyPos = difficultySprite->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
 				int zOrder = difficultySprite->getZOrder();
 				float difficultySize = difficultySprite->getScale();
 
@@ -262,7 +262,7 @@ class $modify(RateStarsLayer) {
 				difficultySpriteMod->setOpacity(255);
 
 				auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
-				cocos2d::CCPoint difficultyPos = difficultySpriteMod->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+				cocos2d::CCPoint difficultyPos = difficultySpriteMod->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
 				int zOrder = difficultySpriteMod->getZOrder();
 				float difficultySize = difficultySpriteMod->getScale();
 
