@@ -4,10 +4,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
-project(MoreDifficulties VERSION 1.4.2)
+project(MoreDifficulties VERSION 1.6.0)
 
 add_library(${PROJECT_NAME} SHARED
     src/main.cpp
+    src/hooks/LevelPage.cpp
+    src/hooks/LevelCell.cpp
+    src/hooks/LevelInfoLayer.cpp
+    src/hooks/RateStarsLayer.cpp
+    src/hooks/ExtendedLevelInfo.cpp
     # Add your cpp files here
 )
 
