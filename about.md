@@ -8,6 +8,8 @@ Adds 3 New Difficulties to the Game!
  * Tough (7*)
  * Cruel (9*)
 
+check level id 79669868 :3
+
 ## Credits
  * Uproxide (Creator)
  * Brift (Difficulty Sprites)

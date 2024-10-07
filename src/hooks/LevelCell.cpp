@@ -23,7 +23,8 @@ class $modify(LevelCell) {
 			int difficulty = p0->getAverageDifficulty();
 			bool isDemon = p0->m_demon.value() == 1;
 
-        	auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
+        	CCSprite* mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
+			CCSprite* mdGlow = CCSprite::createWithSpriteFrameName("MD_LegendaryGlow.png"_spr);
 
 			mdSpr->setZOrder(zOrder);
 			mdSpr->setID("more-difficulties-spr"_spr);
@@ -37,7 +38,7 @@ class $modify(LevelCell) {
 					}
 					break;
 				case 7:
-					if (SaveThings::tough && !isDemon && difficulty == 3) {
+					if (SaveThings::tough && !isDemon && difficulty == 4) {
 						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
 						mdSpr->setPosition(difficultyPos);
 						difficultyNode->addChild(mdSpr);
@@ -45,7 +46,7 @@ class $modify(LevelCell) {
 					}
 					break;
 				case 9:
-					if (SaveThings::cruel && !isDemon && difficulty == 3) {
+					if (SaveThings::cruel && !isDemon && difficulty == 5) {
 						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
 						mdSpr->setPosition(difficultyPos);
 						difficultyNode->addChild(mdSpr);
@@ -85,6 +86,14 @@ class $modify(LevelCell) {
 						break;
 				}
 			}
+
+			if (p0->m_levelID == 79669868) {
+				mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);
+				mdSpr->setPosition(difficultyPos);
+				difficultyNode->addChild(mdSpr);
+				difficultySpr->setOpacity(0);
+			}
+
 		} else {
 			// log::info("difficultyNode no no exist");
 		}

@@ -1,6 +1,9 @@
+# 1.6.0-prerelease.2
+ * Support for BetterInfo
+ * eated burguh
+
 # 1.6.0-prerelease.1
  * Toggle Difficulties option in mod settings
- * Removed Legendary and Mythic Glows temperarily
  * Absolutely killed herobrine
 
 # 1.5.0

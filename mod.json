@@ -1,13 +1,13 @@
 {
-	"geode": "3.3.1",
+	"geode": "3.8.1",
 	"gd": {
 		"android": "2.206",
 		"win": "2.206",
 		"mac": "2.206"
 	},
-	"version": "v1.6.0-prerelease.1",
+	"version": "v1.6.0-prerelease.2",
 	"id": "uproxide.more_difficulties",
-	"name": "https://ninx.baby/",
+	"name": "More Difficulties",
 	"developer": "Uproxide",
 	"description": "Adds New Difficulties to the Game!",
 	"resources": {

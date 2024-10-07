@@ -17,8 +17,10 @@ class $modify(LevelInfoLayer) {
 
 		int starCount = p0->m_stars.value();
 		int suggestedStarCount = p0->m_starsRequested;
+		int difficulty = p0->getAverageDifficulty();
+		bool isDemon = p0->m_demon.value() == 1;
 
-		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint {(useLegacyIcons) ? .0f, .0f : .25f, -.1f};
+		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
 		int zOrder = m_difficultySprite->getZOrder();
 
         auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
@@ -28,14 +30,14 @@ class $modify(LevelInfoLayer) {
 
 		switch(starCount) {
 			case 4:
-				if (SaveThings::casual) {
+				if (SaveThings::casual && !isDemon && difficulty == 3) {
 					mdSpr->setPosition(difficultyPos);
 					this->addChild(mdSpr);
 					m_difficultySprite->setOpacity(0);
 				}
 				break;
 			case 7:
-				if (SaveThings::tough) {
+				if (SaveThings::tough && !isDemon && difficulty == 4) {
 					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
 					mdSpr->setPosition(difficultyPos);
 					this->addChild(mdSpr);
@@ -43,7 +45,7 @@ class $modify(LevelInfoLayer) {
 				}
 				break;
 			case 9:
-				if (SaveThings::cruel) {
+				if (SaveThings::cruel && !isDemon && difficulty == 5) {
 					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
 					mdSpr->setPosition(difficultyPos);
 					this->addChild(mdSpr);
@@ -82,6 +84,13 @@ class $modify(LevelInfoLayer) {
 				default:
 					break;
 			}
+		}
+
+		if (p0->m_levelID == 79669868) {
+			mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);
+			mdSpr->setPosition(difficultyPos);
+			this->addChild(mdSpr);
+			m_difficultySprite->setOpacity(0);
 		}
 
 		return true;
