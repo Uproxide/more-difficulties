@@ -36,13 +36,13 @@ class $modify (ExtendedLevelInfoExt, FLAlertLayer) {
             switch (level->m_starsRequested) {
                 case 4:
                     difficultySpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
-                    difficultySpr->setPositionX(difficultySpr->getPositionX() + (useLegacyIcons ? 0.5 : 0.2));
-                    difficultySpr->setPositionY(difficultySpr->getPositionY() + (useLegacyIcons ? 0.3 : 0.0));
+                    difficultySpr->setPositionX(difficultySpr->getPositionX() + 0.5);
+                    difficultySpr->setPositionY(difficultySpr->getPositionY() + 0.3);
                     break;
                 case 7:
                     difficultySpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-                    difficultySpr->setPositionX(difficultySpr->getPositionX() + (useLegacyIcons ? 0.2 : 0.5));
-                    difficultySpr->setPositionY(difficultySpr->getPositionY() + (useLegacyIcons ? 0.3 : 0.0));
+                    difficultySpr->setPositionX(difficultySpr->getPositionX() + 0.2);
+                    difficultySpr->setPositionY(difficultySpr->getPositionY() + 0.3);
                     break;
                 case 9:
                     difficultySpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);

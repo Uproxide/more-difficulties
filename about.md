@@ -13,6 +13,5 @@ check level id 79669868 :3
 ## Credits
  * Uproxide (Creator)
  * Brift (Difficulty Sprites)
- * Krintop (Legacy Difficulty Sprites)
  * The Discord Server (Your Ideas)
 

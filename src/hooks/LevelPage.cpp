@@ -3,7 +3,7 @@
 using namespace geode::prelude;
 
 #include <Geode/modify/LevelPage.hpp>
-#include "../SaveThings.hpp"
+#include "../managers/SaveThings.hpp"
 
 class $modify(LevelPage) {
 	static void onModify(auto& self) {

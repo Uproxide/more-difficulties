@@ -3,7 +3,7 @@
 using namespace geode::prelude;
 
 #include <Geode/modify/LevelInfoLayer.hpp>
-#include "../SaveThings.hpp"
+#include "../managers/SaveThings.hpp"
 
 class $modify(LevelInfoLayer) {
 	bool init(GJGameLevel* p0, bool p1) {
@@ -20,7 +20,7 @@ class $modify(LevelInfoLayer) {
 		int difficulty = p0->getAverageDifficulty();
 		bool isDemon = p0->m_demon.value() == 1;
 
-		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
+		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint { .0f, .0f };
 		int zOrder = m_difficultySprite->getZOrder();
 
         auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);

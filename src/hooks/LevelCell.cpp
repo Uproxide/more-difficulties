@@ -3,7 +3,8 @@
 using namespace geode::prelude;
 
 #include <Geode/modify/LevelCell.hpp>
-#include "../SaveThings.hpp"
+#include "../managers/SaveThings.hpp"
+#include "../ui/MoreDFSprite.hpp"
 
 class $modify(LevelCell) {
 	void loadFromLevel(GJGameLevel* p0) {
@@ -18,13 +19,14 @@ class $modify(LevelCell) {
 			auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
 			GJDifficultySprite* difficultySpr = static_cast<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
 
-			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
+			cocos2d::CCPoint difficultyPos = difficultySpr->getPosition() + CCPoint { .0f, .0f };
 			int zOrder = difficultySpr->getZOrder();
 			int difficulty = p0->getAverageDifficulty();
 			bool isDemon = p0->m_demon.value() == 1;
 
         	CCSprite* mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
 			CCSprite* mdGlow = CCSprite::createWithSpriteFrameName("MD_LegendaryGlow.png"_spr);
+			// mdGlow->setBlendFunc(ccBlendFunc::)
 
 			mdSpr->setZOrder(zOrder);
 			mdSpr->setID("more-difficulties-spr"_spr);
@@ -32,6 +34,7 @@ class $modify(LevelCell) {
 			switch(starCount) {
 				case 4:
 					if (SaveThings::casual && !isDemon && difficulty == 3) {
+						
 						mdSpr->setPosition(difficultyPos);
 						difficultyNode->addChild(mdSpr);
 						difficultySpr->setOpacity(0);
@@ -85,6 +88,10 @@ class $modify(LevelCell) {
 					default:
 						break;
 				}
+			}
+
+			if (p0->m_isEpic == 2) {
+				// mdSpr->addChild(mdGlow);
 			}
 
 			if (p0->m_levelID == 79669868) {

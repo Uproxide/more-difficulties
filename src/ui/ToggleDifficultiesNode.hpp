@@ -1,9 +1,9 @@
 #pragma once
-#include <Geode/loader/SettingNode.hpp>
+#include <Geode/loader/SettingV3.hpp>
 using namespace geode::prelude;
 
 
-class SettingRefreshValue;
+/* class SettingRefreshValue;
 
 class SettingRefreshValue : public SettingValue {
 protected:
@@ -76,4 +76,4 @@ public:
         CC_SAFE_DELETE(ret);
         return nullptr;
     }
-};
+}; */

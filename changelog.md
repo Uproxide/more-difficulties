@@ -1,3 +1,9 @@
+# 1.6.0
+ * Replaced Legacy Difficulties with Uproxide Difficulties
+  - Pretty much that means I drew them, Capeesh?
+ * Temporarily remove Toggling Difficulties
+ * Port to 2.207
+
 # 1.6.0-prerelease.2
  * Support for BetterInfo
  * eated burguh

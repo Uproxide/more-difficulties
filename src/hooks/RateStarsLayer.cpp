@@ -3,26 +3,26 @@
 using namespace geode::prelude;
 
 #include <Geode/modify/RateStarsLayer.hpp>
-#include "../SaveThings.hpp"
+#include "../managers/SaveThings.hpp"
 
 class $modify(RateStarsLayer) {
 	void selectRating(CCObject* p0) {
 		RateStarsLayer::selectRating(p0);
 
-		if (auto mdSprite = static_cast<CCSprite*>(this->getChildByID("uproxide.more_difficulties/more-difficulties-spr"))) {
-			mdSprite->removeFromParent();
+		if (auto mdSpriteExisting = static_cast<CCSprite*>(this->getChildByID("uproxide.more_difficulties/more-difficulties-spr"))) {
+			mdSpriteExisting->removeFromParent();
 		}
 
 		if (p0 == nullptr) {
 			log::info("created ratestarslayer, n/a selected");
 		} else {
-			auto difficultySprite = getChildOfType<GJDifficultySprite>(m_mainLayer, 0);
+			auto difficultySprite = getChildByType<GJDifficultySprite>(0);
 
 			if (difficultySprite) {
 				difficultySprite->setOpacity(255);
 
 				auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
-				cocos2d::CCPoint difficultyPos = difficultySprite->getPosition() + (useLegacyIcons ? CCPoint { .0f, .0f } : CCPoint { .25f, -.1f });
+				cocos2d::CCPoint difficultyPos = difficultySprite->getPosition() + CCPoint { .0f, .0f };
 				int zOrder = difficultySprite->getZOrder();
 				float difficultySize = difficultySprite->getScale();
 
@@ -60,9 +60,9 @@ class $modify(RateStarsLayer) {
 						break;
 				}
 			} else {
-				auto mainMenu = getChildOfType<CCMenu>(m_mainLayer, 0);
-				auto difficultyBtn = getChildOfType<CCMenuItemSpriteExtra>(mainMenu, 10);
-				auto difficultySpriteMod = getChildOfType<GJDifficultySprite>(difficultyBtn, 0);
+				auto mainMenu = m_mainLayer->getChildByType<CCMenu>(0);
+				auto difficultyBtn = mainMenu->getChildByType<CCMenuItemSpriteExtra>(10);
+				auto difficultySpriteMod = difficultyBtn->getChildByType<GJDifficultySprite>(0);
 
 
 				difficultySpriteMod->setOpacity(255);

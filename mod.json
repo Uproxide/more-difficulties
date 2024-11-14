@@ -1,8 +1,8 @@
 {
-	"geode": "3.8.1",
+	"geode": "4.0.0-alpha.1",
 	"gd": {
-		"android": "2.206",
-		"win": "2.206",
+		"android": "2.2074",
+		"win": "2.2074",
 		"mac": "2.206"
 	},
 	"version": "v1.6.0-prerelease.2",
@@ -26,19 +26,16 @@
 	],
 	"links": {
 		"community": "https://discord.gg/gy4BrxmWrF",
-		"homepage": "https://uproxide.xyz",
+		"homepage": "https://uproxide.glungus.xyz",
 		"source": "https://github.com/uproxide/more-difficulties"
 	},
 	"settings": {
 		"legacy-difficulties": {
-			"name": "Legacy Difficulties",
-			"description": "Enables Legacy Difficulty Sprites (By Krintop)",
+			"name": "Uproxide Difficulties",
+			"description": "Enables Uproxide Difficulty Sprites (By well, Uproxide!)",
 			"type": "bool",
 			"default": false
-		},
-		"toggle-difficulties": {
-            "type": "custom"
-        }
+		}
 	},
 	"dependencies": [
 		{

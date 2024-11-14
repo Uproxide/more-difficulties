@@ -13,6 +13,7 @@ add_library(${PROJECT_NAME} SHARED
     src/hooks/LevelInfoLayer.cpp
     src/hooks/RateStarsLayer.cpp
     src/hooks/ExtendedLevelInfo.cpp
+    src/ui/MoreDFSprite.cpp
     # Add your cpp files here
 )
 

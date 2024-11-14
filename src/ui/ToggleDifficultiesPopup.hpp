@@ -7,7 +7,7 @@
 #include <Geode/ui/TextInput.hpp>
 #include <cctype>
 #include <algorithm>
-#include "SaveThings.hpp"
+#include "./managers/SaveThings.hpp"
 
 using namespace geode::prelude;
 
