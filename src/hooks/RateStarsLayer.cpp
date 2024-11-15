@@ -5,7 +5,7 @@ using namespace geode::prelude;
 #include <Geode/modify/RateStarsLayer.hpp>
 #include "../managers/SaveThings.hpp"
 
-class $modify(RateStarsLayer) {
+/* class $modify(RateStarsLayer) {
 	void selectRating(CCObject* p0) {
 		RateStarsLayer::selectRating(p0);
 
@@ -112,4 +112,4 @@ class $modify(RateStarsLayer) {
 			}
 		}
 	}
-};
+}; */
