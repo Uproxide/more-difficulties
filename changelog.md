@@ -1,7 +1,10 @@
+## 1.7.1
+ * Fixes
+
 # 1.7.0
  * Re-add Toggling Difficulties
  * Add Legendary and Mythic Glows
-  - Enable them in mod settings
+   - Enable them in mod settings
  * Rewrite Difficulty Sprite function
  * Add MacOS Support
  * Port to 4.0.0-beta.1
@@ -14,11 +17,11 @@
  * Temporarily remove Toggling Difficulties
  * Port to 4.0.0-alpha.1
 
-# 1.6.0-prerelease.2
+## 1.6.0-prerelease.2
  * Support for BetterInfo
  * eated burguh
 
-# 1.6.0-prerelease.1
+## 1.6.0-prerelease.1
  * Toggle Difficulties option in mod settings
  * Absolutely killed herobrine
 
@@ -30,11 +33,11 @@
  * Killed Riley :extremedemon:
  * oh yeah and mac os is back ig ughhhh more WORK for me!
 
-# 1.4.2
+## 1.4.2
  * Updated Textures for Legacy and Casual
  * Update Node IDs Dependency
    
-# 1.4.1
+## 1.4.1
  * Bugfix
  
 # 1.4.0
@@ -49,10 +52,10 @@
  * Node ID for the Difficulty Sprite
  * "Legacy Difficulties" Option
 
-# 1.2.0
+## 1.2.0
  * iOS support
 
-# 1.1.1
+## 1.1.1
  * Hotfixes
 
 # 1.1.0
