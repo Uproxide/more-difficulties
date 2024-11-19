@@ -1,3 +1,6 @@
+## 1.7.2
+ * Fix crashing (thanks justin!)
+   
 ## 1.7.1
  * Fixes
 
