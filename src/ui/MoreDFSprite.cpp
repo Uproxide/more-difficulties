@@ -23,6 +23,10 @@ MoreDFSprite* MoreDFSprite::createWithStarCount(int starCount, bool smallSpr) {
 
     std::string spriteName = fmt::format("uproxide.more_difficulties/MD_Difficulty0{}{}.png", starCount, extraStuff);
 
+    if (starCount != 4 && starCount != 7 && starCount != 9) {
+        return nullptr;
+    }
+
     if ((starCount == 4 && !SaveThings::casual) || (starCount == 7 && !SaveThings::tough) || (starCount == 9 && !SaveThings::cruel)) {
         return nullptr;
     }
