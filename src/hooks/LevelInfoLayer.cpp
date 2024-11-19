@@ -4,6 +4,7 @@ using namespace geode::prelude;
 
 #include <Geode/modify/LevelInfoLayer.hpp>
 #include "../managers/SaveThings.hpp"
+#include "../ui/MoreDFSprite.hpp"
 
 class $modify(LevelInfoLayer) {
 	bool init(GJGameLevel* p0, bool p1) {
@@ -23,66 +24,31 @@ class $modify(LevelInfoLayer) {
 		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint { .0f, .0f };
 		int zOrder = m_difficultySprite->getZOrder();
 
-        auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
+        MoreDFSprite* mdSpr = MoreDFSprite::createWithStarCount({(starCount != 0) ? starCount : suggestedStarCount}, false);
+		CCSprite* mdGlow = CCSprite::createWithSpriteFrameName("MD_LegendaryGlow.png"_spr);
 
 		mdSpr->setZOrder(zOrder);
 		mdSpr->setID("more-difficulties-spr"_spr);
 
-		switch(starCount) {
-			case 4:
-				if (SaveThings::casual && !isDemon && difficulty == 3) {
-					mdSpr->setPosition(difficultyPos);
-					this->addChild(mdSpr);
-					m_difficultySprite->setOpacity(0);
-				}
-				break;
-			case 7:
-				if (SaveThings::tough && !isDemon && difficulty == 4) {
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-					mdSpr->setPosition(difficultyPos);
-					this->addChild(mdSpr);
-					m_difficultySprite->setOpacity(0);
-				}
-				break;
-			case 9:
-				if (SaveThings::cruel && !isDemon && difficulty == 5) {
-					mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-					mdSpr->setPosition(difficultyPos);
-					this->addChild(mdSpr);
-					m_difficultySprite->setOpacity(0);
-				}
-				break;
-			default:
-				break;
+		if (mdSpr && ((starCount != 0) ? (starCount == 4 || starCount == 7 || starCount == 9) : (suggestedStarCount == 4 || suggestedStarCount == 7 || suggestedStarCount == 9))) {
+			mdSpr->setZOrder(zOrder);
+			mdSpr->setID("more-difficulties-spr"_spr);
+
+			mdSpr->setPosition(difficultyPos);
+			this->addChild(mdSpr);
+			m_difficultySprite->setOpacity(0);
 		}
 
-		if (starCount == 0) {
-			switch(suggestedStarCount) {
-				case 4:
-					if (SaveThings::casual) {
-						mdSpr->setPosition(difficultyPos);
-						this->addChild(mdSpr);
-						m_difficultySprite->setOpacity(0);
-					}
-					break;
-				case 7:
-					if (SaveThings::tough) {
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-						mdSpr->setPosition(difficultyPos);
-						this->addChild(mdSpr);
-						m_difficultySprite->setOpacity(0);
-					}
-					break;
-				case 9:
-					if (SaveThings::cruel) {
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-						mdSpr->setPosition(difficultyPos);
-						this->addChild(mdSpr);
-						m_difficultySprite->setOpacity(0);
-					}
-					break;
-				default:
-					break;
+		if (Mod::get()->getSettingValue<bool>("toggle-mythic-glow")) {
+			if (mdSpr && p0->m_isEpic == 2) {
+				mdSpr->addChild(mdGlow);
+				mdGlow->setPosition(ccp(mdSpr->getContentWidth() / 2, 26.5));
+				mdGlow->setOpacity(150);
+			} else if (mdSpr && p0->m_isEpic == 3) {
+				mdGlow->initWithSpriteFrameName("MD_MythicGlow.png"_spr);
+				mdSpr->addChild(mdGlow);
+				mdGlow->setPosition(ccp(mdSpr->getContentWidth() / 2, 26.5));
+				mdGlow->setOpacity(150);
 			}
 		}
 

@@ -1,8 +1,18 @@
+# 1.7.0
+ * Re-add Toggling Difficulties
+ * Add Legendary and Mythic Glows
+  - Enable them in mod settings
+ * Rewrite Difficulty Sprite function
+ * Add MacOS Support
+ * Port to 4.0.0-beta.1
+ * Killed Riley again
+ * Removed Herozer
+
 # 1.6.0
  * Replaced Legacy Difficulties with Uproxide Difficulties
   - Pretty much that means I drew them, Capeesh?
  * Temporarily remove Toggling Difficulties
- * Port to 2.207
+ * Port to 4.0.0-alpha.1
 
 # 1.6.0-prerelease.2
  * Support for BetterInfo

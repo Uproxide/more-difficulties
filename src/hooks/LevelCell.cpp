@@ -24,76 +24,32 @@ class $modify(LevelCell) {
 			int difficulty = p0->getAverageDifficulty();
 			bool isDemon = p0->m_demon.value() == 1;
 
-        	CCSprite* mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
+        	MoreDFSprite* mdSpr = MoreDFSprite::createWithStarCount({(starCount != 0) ? starCount : suggestedStarCount}, false);
 			CCSprite* mdGlow = CCSprite::createWithSpriteFrameName("MD_LegendaryGlow.png"_spr);
 			// mdGlow->setBlendFunc(ccBlendFunc::)
 
-			mdSpr->setZOrder(zOrder);
-			mdSpr->setID("more-difficulties-spr"_spr);
+			if (mdSpr && ((starCount != 0) ? (starCount == 4 || starCount == 7 || starCount == 9) : (suggestedStarCount == 4 || suggestedStarCount == 7 || suggestedStarCount == 9))) {
+				mdSpr->setZOrder(zOrder);
+				mdSpr->setID("more-difficulties-spr"_spr);
 
-			switch(starCount) {
-				case 4:
-					if (SaveThings::casual && !isDemon && difficulty == 3) {
-						
-						mdSpr->setPosition(difficultyPos);
-						difficultyNode->addChild(mdSpr);
-						difficultySpr->setOpacity(0);
-					}
-					break;
-				case 7:
-					if (SaveThings::tough && !isDemon && difficulty == 4) {
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-						mdSpr->setPosition(difficultyPos);
-						difficultyNode->addChild(mdSpr);
-						difficultySpr->setOpacity(0);
-					}
-					break;
-				case 9:
-					if (SaveThings::cruel && !isDemon && difficulty == 5) {
-						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-						mdSpr->setPosition(difficultyPos);
-						difficultyNode->addChild(mdSpr);
-						difficultySpr->setOpacity(0);
-					}
-					break;
-				default:
-					break;
+				mdSpr->setPosition(difficultyPos);
+				difficultyNode->addChild(mdSpr);
+				difficultySpr->setOpacity(0);
 			}
-
-			if (starCount == 0) {
-				switch(suggestedStarCount) {
-					case 4:
-						if (SaveThings::casual) {
-							mdSpr->setPosition(difficultyPos);
-							difficultyNode->addChild(mdSpr);
-							difficultySpr->setOpacity(0);
-						}
-						break;
-					case 7:
-						if (SaveThings::tough) {
-							mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
-							mdSpr->setPosition(difficultyPos);
-							difficultyNode->addChild(mdSpr);
-							difficultySpr->setOpacity(0);
-						}
-						break;
-					case 9:
-						if (SaveThings::cruel) {
-							mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
-							mdSpr->setPosition(difficultyPos);
-							difficultyNode->addChild(mdSpr);
-							difficultySpr->setOpacity(0);
-						}
-						break;
-					default:
-						break;
+			
+			if (Mod::get()->getSettingValue<bool>("toggle-mythic-glow")) {
+				if (mdSpr && p0->m_isEpic == 2) {
+					mdSpr->addChild(mdGlow);
+					mdGlow->setPosition(ccp(mdSpr->getContentWidth() / 2, 26.5));
+					mdGlow->setOpacity(150);
+				} else if (mdSpr && p0->m_isEpic == 3) {
+					mdGlow->initWithSpriteFrameName("MD_MythicGlow.png"_spr);
+					mdSpr->addChild(mdGlow);
+					mdGlow->setPosition(ccp(mdSpr->getContentWidth() / 2, 26.5));
+					mdGlow->setOpacity(150);
 				}
 			}
-
-			if (p0->m_isEpic == 2) {
-				// mdSpr->addChild(mdGlow);
-			}
-
+			
 			if (p0->m_levelID == 79669868) {
 				mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);
 				mdSpr->setPosition(difficultyPos);

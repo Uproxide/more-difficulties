@@ -17,7 +17,7 @@ void ToggleDifficultiesNode::onToggleBtn(CCObject*) {
 } */
 
 $on_mod(Loaded) {
-	SaveThings::casual = true;
-	SaveThings::tough = true;
-	SaveThings::cruel = true;
+	SaveThings::casual = Mod::get()->getSavedValue<bool>("casual", true);;
+	SaveThings::tough = Mod::get()->getSavedValue<bool>("tough", true);;
+	SaveThings::cruel = Mod::get()->getSavedValue<bool>("cruel", true);;
 }

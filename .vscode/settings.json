@@ -89,6 +89,9 @@
         "xtr1common": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "cfenv": "cpp",
+        "coroutine": "cpp",
+        "expected": "cpp"
     }
 }

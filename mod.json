@@ -1,11 +1,11 @@
 {
-	"geode": "4.0.0-alpha.1",
+	"geode": "4.0.0-beta.1",
 	"gd": {
 		"android": "2.2074",
 		"win": "2.2074",
-		"mac": "2.206"
+		"mac": "2.2074"
 	},
-	"version": "v1.6.0",
+	"version": "v1.7.0",
 	"id": "uproxide.more_difficulties",
 	"name": "More Difficulties",
 	"developer": "Uproxide",
@@ -35,6 +35,17 @@
 			"description": "Enables Uproxide Difficulty Sprites (By well, Uproxide!)",
 			"type": "bool",
 			"default": false
+		},
+		"toggle-difficulties": {
+			"type": "custom:toggle-difficulties",
+			"name": "Toggle Difficulties",
+			"description": "Toggle on or off certain difficulties."
+		},
+		"toggle-mythic-glow": {
+			"type": "bool",
+			"default": false,
+			"name": "Toggle Mythic Glow",
+			"description": "Toggles on or off the Mythic and Legendary glows."
 		}
 	},
 	"dependencies": [
