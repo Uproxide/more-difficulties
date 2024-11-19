@@ -23,11 +23,11 @@ MoreDFSprite* MoreDFSprite::createWithStarCount(int starCount, bool smallSpr) {
 
     std::string spriteName = fmt::format("uproxide.more_difficulties/MD_Difficulty0{}{}.png", starCount, extraStuff);
 
-    if ((starCount == 4 && !SaveThings::casual) || (starCount == 7 && !SaveThings::tough) || (starCount == 4 && !SaveThings::cruel)) {
+    if ((starCount == 4 && !SaveThings::casual) || (starCount == 7 && !SaveThings::tough) || (starCount == 9 && !SaveThings::cruel)) {
         return nullptr;
     }
 
-    if (ret && ret->initWithSpriteFrameName(spriteName.c_str()) && ret->init()) {
+    if (ret && ret->initWithSpriteFrameName(spriteName.c_str())) {
         ret->autorelease();
         return ret;
     }
