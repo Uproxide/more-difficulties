@@ -27,8 +27,10 @@ class $modify(LevelInfoLayer) {
         MoreDFSprite* mdSpr = MoreDFSprite::createWithStarCount({(starCount != 0) ? starCount : suggestedStarCount}, false);
 		CCSprite* mdGlow = CCSprite::createWithSpriteFrameName("MD_LegendaryGlow.png"_spr);
 
-		mdSpr->setZOrder(zOrder);
-		mdSpr->setID("more-difficulties-spr"_spr);
+		if (mdSpr) {
+			mdSpr->setZOrder(zOrder);
+			mdSpr->setID("more-difficulties-spr"_spr);
+		}
 
 		if (mdSpr && ((starCount != 0) ? (starCount == 4 || starCount == 7 || starCount == 9) : (suggestedStarCount == 4 || suggestedStarCount == 7 || suggestedStarCount == 9))) {
 			mdSpr->setZOrder(zOrder);
@@ -53,9 +55,10 @@ class $modify(LevelInfoLayer) {
 		}
 
 		if (p0->m_levelID == 79669868) {
-			mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);
+			if (!mdSpr) mdSpr = CCSprite::createWithSpriteFrameName("MD_DifficultyCP.png"_spr);
+			else mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);
 			mdSpr->setPosition(difficultyPos);
-			this->addChild(mdSpr);
+			if (mdSpr->getParent() != this) this->addChild(mdSpr);
 			m_difficultySprite->setOpacity(0);
 		}
 
