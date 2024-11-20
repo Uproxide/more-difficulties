@@ -51,9 +51,10 @@ class $modify(LevelCell) {
 			}
 			
 			if (p0->m_levelID == 79669868) {
-				mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);
+				if (!mdSpr) mdSpr = CCSprite::createWithSpriteFrameName("MD_DifficultyCP.png"_spr);
+				else mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);
 				mdSpr->setPosition(difficultyPos);
-				difficultyNode->addChild(mdSpr);
+				if (mdSpr->getParent() != difficultyNode) difficultyNode->addChild(mdSpr);
 				difficultySpr->setOpacity(0);
 			}
 
