@@ -27,11 +27,6 @@ class $modify(LevelInfoLayer) {
         MoreDFSprite* mdSpr = MoreDFSprite::createWithStarCount({(starCount != 0) ? starCount : suggestedStarCount}, false);
 		CCSprite* mdGlow = CCSprite::createWithSpriteFrameName("MD_LegendaryGlow.png"_spr);
 
-		if (mdSpr) {
-			mdSpr->setZOrder(zOrder);
-			mdSpr->setID("more-difficulties-spr"_spr);
-		}
-
 		if (mdSpr && ((starCount != 0) ? (starCount == 4 || starCount == 7 || starCount == 9) : (suggestedStarCount == 4 || suggestedStarCount == 7 || suggestedStarCount == 9))) {
 			mdSpr->setZOrder(zOrder);
 			mdSpr->setID("more-difficulties-spr"_spr);
