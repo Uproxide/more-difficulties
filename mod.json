@@ -1,11 +1,11 @@
 {
-	"geode": "4.0.0-beta.2",
+	"geode": "4.0.1",
 	"gd": {
 		"android": "2.2074",
 		"win": "2.2074",
 		"mac": "2.2074"
 	},
-	"version": "v1.7.2",
+	"version": "v1.7.3",
 	"id": "uproxide.more_difficulties",
 	"name": "More Difficulties",
 	"developer": "Uproxide",
