@@ -1,3 +1,6 @@
+## 1.7.3
+ * Fix crashing (this time fr) (thanks justin!)
+
 ## 1.7.2
  * Fix crashing (thanks justin!)
    

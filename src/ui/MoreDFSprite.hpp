@@ -8,4 +8,5 @@ class MoreDFSprite : public CCSprite {
         static MoreDFSprite* createWithStarCount(int starCount, bool smallSpr);
         static MoreDFSprite* createWithName(std::string name, bool smallSpr);
         static MoreDFSprite* createWithLevelID(int levelID, std::string name, bool smallSpr);
+        static MoreDFSprite* createWithSpriteFrameName(const char* name);
 };

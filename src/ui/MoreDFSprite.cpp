@@ -39,6 +39,13 @@ MoreDFSprite* MoreDFSprite::createWithStarCount(int starCount, bool smallSpr) {
     return nullptr;
 }; 
 
-MoreDFSprite* MoreDFSprite::createWithName(std::string name, bool smallSpr) {
-    
+MoreDFSprite* MoreDFSprite::createWithSpriteFrameName(const char* name) {
+    auto ret = new MoreDFSprite();
+
+    if (ret && ret->initWithSpriteFrameName(name)) {
+        ret->autorelease();
+        return ret;
+    }
+    CC_SAFE_DELETE(ret);
+    return nullptr;
 }
