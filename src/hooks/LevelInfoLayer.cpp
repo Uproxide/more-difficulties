@@ -50,7 +50,7 @@ class $modify(LevelInfoLayer) {
 		}
 
 		if (p0->m_levelID == 79669868) {
-			if (!mdSpr) mdSpr = CCSprite::createWithSpriteFrameName("MD_DifficultyCP.png"_spr);
+			if (!mdSpr) mdSpr = MoreDFSprite::createWithSpriteFrameName("MD_DifficultyCP.png"_spr);
 			else mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);
 			mdSpr->setPosition(difficultyPos);
 			if (mdSpr->getParent() != this) this->addChild(mdSpr);
