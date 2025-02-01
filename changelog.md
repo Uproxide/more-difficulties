@@ -1,8 +1,8 @@
 # 1.8.0
-- Added back `RateStarsLayer`
-- Added `ShareLevelLayer`
-- **Removed Glows**
-  - This will be the final time they are removed, as they will not be added back.
+ * Added back RateStarsLayer
+ * Added ShareLevelLayer
+ * Removed Mythic and Legendary Glows (For the last time im not adding them back)
+ * Remove MacOS support temporarily (sorry to the 3.5 mac users)
 
 ## 1.7.3
  * Fix crashing (this time fr) (thanks justin!)
