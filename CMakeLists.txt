@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
-project(MoreDifficulties VERSION 1.6.0)
+project(MoreDifficulties VERSION 1.8.0)
 
 add_library(${PROJECT_NAME} SHARED
     src/main.cpp
@@ -13,8 +13,8 @@ add_library(${PROJECT_NAME} SHARED
     src/hooks/LevelInfoLayer.cpp
     src/hooks/RateStarsLayer.cpp
     src/hooks/ExtendedLevelInfo.cpp
+    src/hooks/ShareLevelLayer.cpp
     src/ui/MoreDFSprite.cpp
-    # Add your cpp files here
 )
 
 if (NOT DEFINED ENV{GEODE_SDK})

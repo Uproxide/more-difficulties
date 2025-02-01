@@ -37,19 +37,6 @@ class $modify(LevelCell) {
 				difficultySpr->setOpacity(0);
 			}
 			
-			if (Mod::get()->getSettingValue<bool>("toggle-mythic-glow")) {
-				if (mdSpr && p0->m_isEpic == 2) {
-					mdSpr->addChild(mdGlow);
-					mdGlow->setPosition(ccp(mdSpr->getContentWidth() / 2, 26.5));
-					mdGlow->setOpacity(150);
-				} else if (mdSpr && p0->m_isEpic == 3) {
-					mdGlow->initWithSpriteFrameName("MD_MythicGlow.png"_spr);
-					mdSpr->addChild(mdGlow);
-					mdGlow->setPosition(ccp(mdSpr->getContentWidth() / 2, 26.5));
-					mdGlow->setOpacity(150);
-				}
-			}
-			
 			if (p0->m_levelID == 79669868) {
 				if (!mdSpr) mdSpr = MoreDFSprite::createWithSpriteFrameName("MD_DifficultyCP.png"_spr);
 				else mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);

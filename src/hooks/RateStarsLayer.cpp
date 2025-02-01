@@ -5,7 +5,7 @@ using namespace geode::prelude;
 #include <Geode/modify/RateStarsLayer.hpp>
 #include "../managers/SaveThings.hpp"
 
-/* class $modify(RateStarsLayer) {
+class $modify(RateStarsLayer) {
 	void selectRating(CCObject* p0) {
 		RateStarsLayer::selectRating(p0);
 
@@ -16,7 +16,7 @@ using namespace geode::prelude;
 		if (p0 == nullptr) {
 			log::info("created ratestarslayer, n/a selected");
 		} else {
-			auto difficultySprite = getChildByType<GJDifficultySprite>(0);
+			auto difficultySprite = m_mainLayer->getChildByType<GJDifficultySprite>(0);
 
 			if (difficultySprite) {
 				difficultySprite->setOpacity(255);
@@ -112,4 +112,4 @@ using namespace geode::prelude;
 			}
 		}
 	}
-}; */
+};

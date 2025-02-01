@@ -1,11 +1,11 @@
 {
-	"geode": "4.0.1",
+	"geode": "4.2.0",
 	"gd": {
 		"android": "2.2074",
 		"win": "2.2074",
 		"mac": "2.2074"
 	},
-	"version": "v1.7.3",
+	"version": "v1.8.0",
 	"id": "uproxide.more_difficulties",
 	"name": "More Difficulties",
 	"developer": "Uproxide",
@@ -40,19 +40,9 @@
 			"type": "custom:toggle-difficulties",
 			"name": "Toggle Difficulties",
 			"description": "Toggle on or off certain difficulties."
-		},
-		"toggle-mythic-glow": {
-			"type": "bool",
-			"default": false,
-			"name": "Toggle Mythic Glow",
-			"description": "Toggles on or off the Mythic and Legendary glows."
 		}
 	},
-	"dependencies": [
-		{
-			"id": "geode.node-ids",
-			"version": ">=1.12.0",
-			"importance": "required"
-  		}
-  	]
+	"dependencies": {
+		"geode.node-ids": "1.12.0"
+	}
 }

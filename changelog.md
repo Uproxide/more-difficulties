@@ -1,3 +1,9 @@
+# 1.8.0
+- Added back `RateStarsLayer`
+- Added `ShareLevelLayer`
+- **Removed Glows**
+  - This will be the final time they are removed, as they will not be added back.
+
 ## 1.7.3
  * Fix crashing (this time fr) (thanks justin!)
 

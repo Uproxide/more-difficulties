@@ -30,9 +30,6 @@ class $modify (ExtendedLevelInfoExt, FLAlertLayer) {
 
             CCSprite* difficultySpr = as<CCSprite*>(popup->getChildByIDRecursive("cvolton.betterinfo/difficulty-sprite"));
 
-            log::debug("{}", popup);
-            log::debug("{}", difficultySpr);
-
             switch (level->m_starsRequested) {
                 case 4:
                     difficultySpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);

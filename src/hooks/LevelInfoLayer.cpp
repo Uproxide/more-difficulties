@@ -12,8 +12,6 @@ class $modify(LevelInfoLayer) {
 			return false;
 		}
 
-		log::info("{}", p0->m_isEpic);
-
 		auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
 
 		int starCount = p0->m_stars.value();
@@ -34,19 +32,6 @@ class $modify(LevelInfoLayer) {
 			mdSpr->setPosition(difficultyPos);
 			this->addChild(mdSpr);
 			m_difficultySprite->setOpacity(0);
-		}
-
-		if (Mod::get()->getSettingValue<bool>("toggle-mythic-glow")) {
-			if (mdSpr && p0->m_isEpic == 2) {
-				mdSpr->addChild(mdGlow);
-				mdGlow->setPosition(ccp(mdSpr->getContentWidth() / 2, 26.5));
-				mdGlow->setOpacity(150);
-			} else if (mdSpr && p0->m_isEpic == 3) {
-				mdGlow->initWithSpriteFrameName("MD_MythicGlow.png"_spr);
-				mdSpr->addChild(mdGlow);
-				mdGlow->setPosition(ccp(mdSpr->getContentWidth() / 2, 26.5));
-				mdGlow->setOpacity(150);
-			}
 		}
 
 		if (p0->m_levelID == 79669868) {
