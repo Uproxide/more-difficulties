@@ -1,3 +1,6 @@
+# 1.8.2
+ * JIT-Less support for iOS
+
 # 1.8.0
  * Added back RateStarsLayer
  * Added ShareLevelLayer
