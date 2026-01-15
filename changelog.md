@@ -1,3 +1,7 @@
+# 1.8.3
+ * Remade Uproxide Difficulty textures.
+  - Miss the old ones? Download Legacy Uproxide Difficulties from [Texture Workshop](mod:uproxide.textures)!
+
 # 1.8.2
  * JIT-Less support for iOS
 

@@ -6,7 +6,7 @@
 		"mac": "2.2074",
 		"ios": "2.2074"
 	},
-	"version": "v1.8.2",
+	"version": "v1.8.3",
 	"id": "uproxide.more_difficulties",
 	"name": "More Difficulties",
 	"developer": "Uproxide",
@@ -44,6 +44,6 @@
 		}
 	},
 	"dependencies": {
-		"geode.node-ids": "1.12.0"
+		"geode.node-ids": ">=1.21.1"
 	}
 }
