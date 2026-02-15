@@ -1,3 +1,8 @@
+# 1.8.4
+ * Geode 5.0.0-beta.1 / Geometry Dash 2.208 Support
+ * Godlike Faces! Enable in settings.
+ * Refreshed Faces.
+
 # 1.8.3
  * Remade Uproxide Difficulty textures.
   - Miss the old ones? Download Legacy Uproxide Difficulties from [Texture Workshop](mod:uproxide.textures)!

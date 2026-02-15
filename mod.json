@@ -1,12 +1,12 @@
 {
-	"geode": "4.10.0",
+	"geode": "5.0.0-beta.1",
 	"gd": {
-		"android": "2.2074",
-		"win": "2.2074",
-		"mac": "2.2074",
-		"ios": "2.2074"
+		"android": "2.2081",
+		"win": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
 	},
-	"version": "v1.8.3",
+	"version": "v1.8.4",
 	"id": "uproxide.more_difficulties",
 	"name": "More Difficulties",
 	"developer": "Uproxide",
@@ -15,6 +15,12 @@
         "spritesheets": {
 			"MD_DifficultySheet": [
 				"resources/DifficultySheet/*.png"
+			],
+			"MD_LegendarySheet": [
+				"resources/LegendarySheet/*.png"
+			],
+			"MD_MythicSheet": [
+				"resources/MythicSheet/*.png"
 			]
 		}
 	},
@@ -37,6 +43,12 @@
 			"type": "bool",
 			"default": false
 		},
+		"godlike-faces": {
+			"name": "Godlike Faces",
+			"description": "Enables Godlike Difficulty Faces. (Does not work with Uproxide Difficulties)",
+			"type": "bool",
+			"default": false
+		},
 		"toggle-difficulties": {
 			"type": "custom:toggle-difficulties",
 			"name": "Toggle Difficulties",
@@ -44,6 +56,6 @@
 		}
 	},
 	"dependencies": {
-		"geode.node-ids": ">=1.21.1"
+		"geode.node-ids": ">=1.22.0-beta.2"
 	}
 }

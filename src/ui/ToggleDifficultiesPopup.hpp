@@ -12,9 +12,12 @@
 using namespace geode::prelude;
 
 
-class ToggleDifficultiesPopup : public Popup<> {
+class ToggleDifficultiesPopup : public Popup {
 public:
-    bool setup() {
+    bool init() {
+        if (!Popup::init(400, 130, "geode.loader/GE_square01.png"))
+            return false;
+
         log::info("hai");
 
         auto bg = cocos2d::extension::CCScale9Sprite::create("square02_small.png");
@@ -109,12 +112,12 @@ public:
     }
 
     static ToggleDifficultiesPopup* create() {
-        auto ret = new ToggleDifficultiesPopup();
-        if (ret && ret->initAnchored(400, 130, "geode.loader/GE_square01.png")) {
-            ret->autorelease();
-            return ret;
+        auto popup = new ToggleDifficultiesPopup;
+        if (popup->init()) {
+            popup->autorelease();
+            return popup;
         }
-        CC_SAFE_DELETE(ret);
+        delete popup;
         return nullptr;
     }
 };

@@ -1,4 +1,4 @@
-#include <Geode/Geode.hpp>
+/*#include <Geode/Geode.hpp>
 #include <Geode/modify/FLAlertLayer.hpp>
 #include <Geode/modify/InfoLayer.hpp>
 
@@ -49,4 +49,4 @@ class $modify (ExtendedLevelInfoExt, FLAlertLayer) {
             }
         }
     }
-};
+};*/
