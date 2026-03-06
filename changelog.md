@@ -1,6 +1,6 @@
 # 1.9.0
  * Map Pack support
-   - check your map packs. asap.
+   - check your map packs. now.
 
 # 1.8.4
  * Geode 5.0.0-beta.1 / Geometry Dash 2.208 Support
