@@ -21,6 +21,7 @@ add_library(${PROJECT_NAME} SHARED
     src/hooks/RateStarsLayer.cpp
     src/hooks/ExtendedLevelInfo.cpp
     src/hooks/ShareLevelLayer.cpp
+    src/hooks/MapPackCell.cpp
     src/ui/MoreDFSprite.cpp
 )
 

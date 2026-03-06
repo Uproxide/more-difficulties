@@ -6,7 +6,7 @@ using namespace geode::prelude;
 
 GJGameLevel* level;
 
-class ExtendedLevelInfo : public geode::Popup<> {};
+class ExtendedLevelInfo : public Popup {};
 
 class $modify (InfoLayer) {
     bool init(GJGameLevel* p0, GJUserScore* p1, GJLevelList* p2) {
@@ -26,9 +26,9 @@ class $modify (ExtendedLevelInfoExt, FLAlertLayer) {
 
         if (auto popup = typeinfo_cast<ExtendedLevelInfo*>(this)) {
             auto useLegacyIcons = Mod::get()->getSettingValue<bool>("legacy-difficulties");
-            auto buttonMenu = as<CCMenu*>(popup->getChildByIDRecursive("cvolton.betterinfo/button-menu"));
+            auto buttonMenu = as<CCMenu>(popup->getChildByIDRecursive("cvolton.betterinfo/button-menu"));
 
-            CCSprite* difficultySpr = as<CCSprite*>(popup->getChildByIDRecursive("cvolton.betterinfo/difficulty-sprite"));
+            CCSprite* difficultySpr = as<CCSprite>(popup->getChildByIDRecursive("cvolton.betterinfo/difficulty-sprite"));
 
             switch (level->m_starsRequested) {
                 case 4:
@@ -49,4 +49,6 @@ class $modify (ExtendedLevelInfoExt, FLAlertLayer) {
             }
         }
     }
-};*/
+};*/ 
+// idk what geode changed as to but until i figure that out i cant add back the fuckass betterinfo support so its not
+// gonna be here until i figure dat out :P
