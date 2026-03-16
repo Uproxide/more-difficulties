@@ -1,3 +1,6 @@
+# 1.9.1
+ * fix a really stupid bug that flew over my head
+
 # 1.9.0
  * Map Pack support
    - check your map packs. now.
