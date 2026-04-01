@@ -1,3 +1,6 @@
+# 1.9.2
+ * les dififucltie! 
+ 
 # 1.9.1
  * fix a really stupid bug that flew over my head
 
