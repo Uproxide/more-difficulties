@@ -23,14 +23,16 @@ class $modify(MapPackCell) {
 
         if (difficultySpr) {
 			difficultySpr->setID("difficulty-spr");
-            MoreDFSprite* mdSpr = MoreDFSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr);
+            MoreDFSprite* mdSpr = MoreDFSprite::createWithStarCount(starCount, false, 0);
 
-			mdSpr->setZOrder(difficultySpr->getZOrder());
-			mdSpr->setID("more-difficulties-spr"_spr);
-            mdSpr->setScale(difficultySpr->getScale());
-			mdSpr->setPosition(difficultySpr->getPosition());
-			this->addChild(mdSpr);
-			difficultySpr->setOpacity(0);
+            if (mdSpr && ((starCount == 4 || starCount == 7 || starCount == 9))) {
+				mdSpr->setZOrder(difficultySpr->getZOrder());
+				mdSpr->setID("more-difficulties-spr"_spr);
+                mdSpr->setScale(difficultySpr->getScale());
+				mdSpr->setPosition(difficultySpr->getPosition());
+				this->addChild(mdSpr);
+				difficultySpr->setOpacity(0);
+			}
         }
     }
 }; 

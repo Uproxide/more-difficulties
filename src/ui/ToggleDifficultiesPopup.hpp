@@ -38,34 +38,34 @@ public:
 
         menu->setPosition(bg->getContentSize() / 2);
 
-        auto offCasual = CCSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr);
+        auto offCasual = CCSprite::createWithSpriteFrameName("MD_Difficulty04.png"_spr);
         offCasual->setOpacity(100);
 
         auto casualToggle = CCMenuItemToggler::create(
             offCasual,
-            CCSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr),
+            CCSprite::createWithSpriteFrameName("MD_Difficulty04.png"_spr),
             this,
             menu_selector(ToggleDifficultiesPopup::toggleDifficulty)
         );
         menu->addChild(casualToggle);
 
-        auto offTough = CCSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr);
+        auto offTough = CCSprite::createWithSpriteFrameName("MD_Difficulty07.png"_spr);
         offTough->setOpacity(100);
 
         auto toughToggle = CCMenuItemToggler::create(
             offTough,
-            CCSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr),
+            CCSprite::createWithSpriteFrameName("MD_Difficulty07.png"_spr),
             this,
             menu_selector(ToggleDifficultiesPopup::toggleDifficulty)
         );
         menu->addChild(toughToggle);
 
-        auto offCruel = CCSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr);
+        auto offCruel = CCSprite::createWithSpriteFrameName("MD_Difficulty09.png"_spr);
         offCruel->setOpacity(100);
 
         auto cruelToggle = CCMenuItemToggler::create(
             offCruel,
-            CCSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr),
+            CCSprite::createWithSpriteFrameName("MD_Difficulty09.png"_spr),
             this,
             menu_selector(ToggleDifficultiesPopup::toggleDifficulty)
         );

@@ -24,20 +24,32 @@ class $modify(LevelCell) {
 			int difficulty = p0->getAverageDifficulty();
 			bool isDemon = p0->m_demon.value() == 1;
 
-        	MoreDFSprite* mdSpr = MoreDFSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr);
+        	MoreDFSprite* mdSpr = MoreDFSprite::createWithStarCount({(starCount != 0) ? starCount : suggestedStarCount}, false, p0->m_isEpic);
 			//CCSprite* mdGlow = CCSprite::createWithSpriteFrameName("MD_LegendaryGlow.png"_spr);
 			// mdGlow->setBlendFunc(ccBlendFunc::)
 
-			mdSpr->setZOrder(zOrder);
-			mdSpr->setID("more-difficulties-spr"_spr);
+			if (mdSpr && ((starCount != 0) ? (starCount == 4 || starCount == 7 || starCount == 9) : (suggestedStarCount == 4 || suggestedStarCount == 7 || suggestedStarCount == 9))) {
+				mdSpr->setZOrder(zOrder);
+				mdSpr->setID("more-difficulties-spr"_spr);
 
-			mdSpr->setPosition(difficultyPos);
-			difficultyNode->addChild(mdSpr);
-			difficultySpr->setOpacity(0);
+				mdSpr->setPosition(difficultyPos);
+				difficultyNode->addChild(mdSpr);
+				difficultySpr->setOpacity(0);
+			}
 			
 			if (p0->m_levelID == 79669868) {
 				if (!mdSpr) mdSpr = MoreDFSprite::createWithSpriteFrameName("MD_DifficultyCP.png"_spr);
 				else mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);
+				mdSpr->setZOrder(zOrder);
+				mdSpr->setPosition(difficultyPos);
+				if (mdSpr->getParent() != difficultyNode) difficultyNode->addChild(mdSpr);
+				difficultySpr->setOpacity(0);
+			}
+
+			if (p0->m_levelID == 137147681) {
+				if (!mdSpr) mdSpr = MoreDFSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr);
+				else mdSpr->initWithSpriteFrameName("MD_DifficultyYO.png"_spr);
+				mdSpr->setZOrder(zOrder);
 				mdSpr->setPosition(difficultyPos);
 				if (mdSpr->getParent() != difficultyNode) difficultyNode->addChild(mdSpr);
 				difficultySpr->setOpacity(0);

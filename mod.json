@@ -6,11 +6,11 @@
 		"mac": "2.2081",
 		"ios": "2.2081"
 	},
-	"version": "v1.9.2",
+	"version": "v1.9.3",
 	"id": "uproxide.more_difficulties",
-	"name": "less dificultise",
-	"developer": "GNAOMI",
-	"description": "REMOVES Difficultiyss FROM the Game!",
+	"name": "More Difficulties",
+	"developer": "Uproxide",
+	"description": "Adds New Difficulties to the Game!",
 	"resources": {
         "spritesheets": {
 			"MD_DifficultySheet": [

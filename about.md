@@ -1,13 +1,26 @@
 # JOIN THE [Discord](https://discord.gg/gy4BrxmWrF)
 
-# LES DIFFUCUKTIES
+# More Difficulties
 
-Remove difficultiys formt he game! veyre helpul :)
+Adds 3 New Difficulties to the Game!
 
-check level id 79669868 :3
+ * Casual (4*)
+ * Tough (7*)
+ * Cruel (9*)
+
+
+Miss the yellow one? Check out [137147681!](level:137147681)
 
 ## Credits
- * GNAOMI!!! (Creator)
- * gift (Difficulty Sprites)
- * The difcord Server (Your Ideas)
+ * Uproxide (Creator)
+ * Brift (Difficulty Sprites)
+ * The Discord Server (Your Ideas)
+
+
+
+
+
+
+
+check level id [79669868](level:79669868) :3
 

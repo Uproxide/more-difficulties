@@ -19,15 +19,40 @@ class $modify(ShareLevelLayer) {
 			int zOrder = difficultySprite->getZOrder();
 			float difficultySize = difficultySprite->getScale();
 
-			auto mdSpr = CCSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr);
+			auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
 
 			mdSpr->setZOrder(zOrder);
 			mdSpr->setID("more-difficulties-spr"_spr);
 			mdSpr->setScale(difficultySize);
-			mdSpr->setPosition(difficultyPos);
-			m_mainLayer->addChild(mdSpr);
-			difficultySprite->setOpacity(0);
-		}
+
+            switch(level->m_starsRequested) {
+                case 4:
+                    if (SaveThings::casual) {
+                        mdSpr->setPosition(difficultyPos);
+						m_mainLayer->addChild(mdSpr);
+						difficultySprite->setOpacity(0);
+                    }
+                    break;
+                case 7:
+                    if (SaveThings::tough) {
+                        mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+                        mdSpr->setPosition(difficultyPos);
+						m_mainLayer->addChild(mdSpr);
+						difficultySprite->setOpacity(0);
+                    }
+                    break;
+                case 9:
+                    if (SaveThings::cruel) {
+                        mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+                        mdSpr->setPosition(difficultyPos);
+						m_mainLayer->addChild(mdSpr);
+						difficultySprite->setOpacity(0);
+                    }
+                    break;
+                default:
+                    break;
+            }            
+        }
 
         return true;
     }
@@ -52,14 +77,39 @@ class $modify(ShareLevelLayer) {
 				int zOrder = difficultySprite->getZOrder();
 				float difficultySize = difficultySprite->getScale();
 
-				auto mdSpr = CCSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr);
+				auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04_Legacy.png"_spr : "MD_Difficulty04.png"_spr);
 
 				mdSpr->setZOrder(zOrder);
 				mdSpr->setID("more-difficulties-spr"_spr);
 				mdSpr->setScale(difficultySize);
-				mdSpr->setPosition(difficultyPos);
-				m_mainLayer->addChild(mdSpr);
-				difficultySprite->setOpacity(0);
+
+				switch(p0->getTag()) {
+					case 4:
+						if (SaveThings::casual) {
+							mdSpr->setPosition(difficultyPos);
+							m_mainLayer->addChild(mdSpr);
+							difficultySprite->setOpacity(0);
+						}
+						break;
+					case 7:
+						if (SaveThings::tough) {
+							mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07_Legacy.png"_spr : "MD_Difficulty07.png"_spr);
+							mdSpr->setPosition(difficultyPos);
+							m_mainLayer->addChild(mdSpr);
+							difficultySprite->setOpacity(0);
+						}
+						break;
+					case 9:
+						if (SaveThings::cruel) {
+							mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09_Legacy.png"_spr : "MD_Difficulty09.png"_spr);
+							mdSpr->setPosition(difficultyPos);
+							m_mainLayer->addChild(mdSpr);
+							difficultySprite->setOpacity(0);
+						}
+						break;
+					default:
+						break;
+				}
 			} 
 		}
 	}

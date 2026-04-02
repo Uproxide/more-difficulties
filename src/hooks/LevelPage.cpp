@@ -27,14 +27,45 @@ class $modify(LevelPage) {
 				spr->removeMeAndCleanup();
 			}
 
-			auto mdSpr = CCSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr);
+			auto mdSpr = CCSprite::createWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty04Small_Legacy.png"_spr : "MD_Difficulty04Small.png"_spr);
 
 			mdSpr->setZOrder(zOrder);
 			mdSpr->setID("more-difficulties-spr"_spr);
 			mdSpr->setScale(difficultySize);
-			difficultySpr->getParent()->addChild(mdSpr);
-			mdSpr->setPosition(difficultyPos);
-			difficultySpr->setVisible(false);
+
+			switch(p0->m_levelID) {
+				case 5:
+				case 7:
+					if (SaveThings::casual) {
+						difficultySpr->getParent()->addChild(mdSpr);
+						mdSpr->setPosition(difficultyPos);
+						difficultySpr->setVisible(false);
+					}
+					break;
+				case 8:
+				case 9:		
+				case 13:
+				case 21:
+				case 22:
+					if (SaveThings::tough) {
+						difficultySpr->getParent()->addChild(mdSpr);
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty07Small_Legacy.png"_spr : "MD_Difficulty07Small.png"_spr);
+						mdSpr->setPosition(difficultyPos);
+						difficultySpr->setVisible(false);
+					}
+					break;
+				case 11:
+				case 15:
+					if (SaveThings::cruel) {
+						difficultySpr->getParent()->addChild(mdSpr);
+						mdSpr->initWithSpriteFrameName((useLegacyIcons) ? "MD_Difficulty09Small_Legacy.png"_spr : "MD_Difficulty09Small.png"_spr);
+						mdSpr->setPosition(difficultyPos);
+						difficultySpr->setVisible(false);
+					}
+					break;
+				default:
+					/* we all gotta */ break; /* sometime */
+			} // sorry for the sin guys... best way for Main Levles...
 		}
 	}
 };
