@@ -12,7 +12,7 @@ Adds 3 New Difficulties to the Game!
 Miss the yellow one? Check out [137147681!](level:137147681)
 
 ## Credits
- * Uproxide (Creator)
+ * [Uproxide](user:25397826) (Creator)
  * Brift (Difficulty Sprites)
  * The Discord Server (Your Ideas)
 
