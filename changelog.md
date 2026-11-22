@@ -1,3 +1,8 @@
+# 1.9.4
+ * Support for GD 2.209
+
+there was no 1.9.2 or 1.9.3. it was all a lie.
+
 # 1.9.1
  * fix a really stupid bug that flew over my head
 

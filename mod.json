@@ -1,12 +1,12 @@
 {
-	"geode": "5.5.3",
+	"geode": "6.0.0-beta.1",
 	"gd": {
-		"android": "2.2081",
-		"win": "2.2081",
-		"mac": "2.2081",
-		"ios": "2.2081"
+		"android": "2.2091",
+		"win": "2.2091",
+		"mac": "2.2091",
+		"ios": "2.2091"
 	},
-	"version": "v1.9.3",
+	"version": "v1.9.4",
 	"id": "uproxide.more_difficulties",
 	"name": "More Difficulties",
 	"developer": "Uproxide",
@@ -56,6 +56,10 @@
 		}
 	},
 	"dependencies": {
-		"geode.node-ids": ">=1.22.0-beta.2"
+		"geode.node-ids": ">=1.15.0",
+		"smjs.object-collab": {
+			"version": ">=0.5.3-beta.1",
+			"required": false
+		}
 	}
 }
