@@ -1,9 +1,12 @@
-# 1.9.4
- * Support for GD 2.209
+## 1.9.5
+ * Support for macOS and iOS on 2.2091
+ 
+## 1.9.4
+ * Support for GD 2.2091
 
 there was no 1.9.2 or 1.9.3. it was all a lie.
 
-# 1.9.1
+## 1.9.1
  * fix a really stupid bug that flew over my head
 
 # 1.9.0
@@ -19,7 +22,7 @@ there was no 1.9.2 or 1.9.3. it was all a lie.
  * Remade Uproxide Difficulty textures.
   - Miss the old ones? Download Legacy Uproxide Difficulties from [Texture Workshop](mod:uproxide.textures)!
 
-# 1.8.2
+## 1.8.2
  * JIT-Less support for iOS
 
 # 1.8.0
