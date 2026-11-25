@@ -19,36 +19,32 @@ class $modify(LevelInfoLayer) {
 		int difficulty = p0->getAverageDifficulty();
 		bool isDemon = p0->m_demon.value() == 1;
 
-		cocos2d::CCPoint difficultyPos = m_difficultySprite->getPosition() + CCPoint { .0f, .0f };
-		int zOrder = m_difficultySprite->getZOrder();
+		cocos2d::CCPoint difficultyPos = m_difficultySprite->getContentSize() / 2.0f;
 
         MoreDFSprite* mdSpr = MoreDFSprite::createWithStarCount({(starCount != 0) ? starCount : suggestedStarCount}, false, p0->m_isEpic);
 		//CCSprite* mdGlow = CCSprite::createWithSpriteFrameName("MD_LegendaryGlow.png"_spr);
 
 		if (mdSpr && ((starCount != 0) ? (starCount == 4 || starCount == 7 || starCount == 9) : (suggestedStarCount == 4 || suggestedStarCount == 7 || suggestedStarCount == 9))) {
-			mdSpr->setZOrder(zOrder);
 			mdSpr->setID("more-difficulties-spr"_spr);
 
 			mdSpr->setPosition(difficultyPos);
-			this->addChild(mdSpr);
+			m_difficultySprite->addChild(mdSpr);
 			m_difficultySprite->setOpacity(0);
 		}
 
 		if (p0->m_levelID == 79669868) {
 			if (!mdSpr) mdSpr = MoreDFSprite::createWithSpriteFrameName("MD_DifficultyCP.png"_spr);
 			else mdSpr->initWithSpriteFrameName("MD_DifficultyCP.png"_spr);
-			mdSpr->setZOrder(zOrder);
 			mdSpr->setPosition(difficultyPos);
-			if (mdSpr->getParent() != this) this->addChild(mdSpr);
+			if (mdSpr->getParent() != m_difficultySprite) m_difficultySprite->addChild(mdSpr);
 			m_difficultySprite->setOpacity(0);
 		}
 
 		if (p0->m_levelID == 137147681) {
 			if (!mdSpr) mdSpr = MoreDFSprite::createWithSpriteFrameName("MD_DifficultyYO.png"_spr);
 			else mdSpr->initWithSpriteFrameName("MD_DifficultyYO.png"_spr);
-			mdSpr->setZOrder(zOrder);
 			mdSpr->setPosition(difficultyPos);
-			if (mdSpr->getParent() != this) this->addChild(mdSpr);
+			if (mdSpr->getParent() != m_difficultySprite) m_difficultySprite->addChild(mdSpr);
 			m_difficultySprite->setOpacity(0);
 		}
 
